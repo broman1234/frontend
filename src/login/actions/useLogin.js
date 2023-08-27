@@ -7,44 +7,17 @@ const useLogin = () => {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [fetchedRoles, setFetchedRoles] = useState([]);
-    const [selectedRoles, setSelectedRoles] = useState([]);
 
     useEffect(() => {
         if (user.jwt) {
             navigate("/dashboard");
-        } else {
-            fetchRoles();
         }
     }, [navigate, user]);
-
-    const fetchRoles = () => {
-        fetch("api/auth/roles", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "get"
-            }
-        )
-          .then(response => {
-                if (response.status === 200) {
-                    return Promise.all([response.json()]);
-                } else {
-                    return Promise.reject("Cannot fetch roles");
-                }
-            })
-          .then(([body]) => {
-                setFetchedRoles(body);
-            }).catch((message) => {
-            alert(message);
-        });
-    }
 
     const sendLoginRequest = () => {
         const reqBody = {
             "username": username,
-            "password": password,
-            "roles": fetchedRoles.filter(role => selectedRoles.includes(role.id))
+            "password": password
         };
         fetch("api/auth/login", {
             headers: {
@@ -70,11 +43,8 @@ const useLogin = () => {
     return {
         username,
         password,
-        fetchedRoles,
         setUsername,
         setPassword,
-        selectedRoles,
-        setSelectedRoles,
         sendLoginRequest,
     }
 }
