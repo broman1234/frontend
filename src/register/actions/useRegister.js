@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 const useRegister = () => {
     const user = useUser();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [fetchedRoles, setFetchedRoles] = useState([]);
@@ -17,6 +17,20 @@ const useRegister = () => {
             fetchRoles();
         }
     }, [navigate, user]);
+
+    const updateSelectedRole = (selectedRole) => {
+        const newSelectedRoles = ([...selectedRoles, selectedRole]);
+        setSelectedRoles(newSelectedRoles);
+    }
+
+    const getButtonTitle = () => {
+        const buttonTitle = fetchedRoles
+            .filter(fetchedRole => selectedRoles.includes(fetchedRole.id.toString()))
+            .map(role => role.roleName)
+            .join(', ');
+        console.log(buttonTitle)
+        return buttonTitle;
+    }
 
     const fetchRoles = () => {
         fetch("api/auth/roles", {
@@ -42,30 +56,34 @@ const useRegister = () => {
 
     const sendRegisterRequest = () => {
         const reqBody = {
-            "username": username,
-            "password": password,
-            "roles": fetchedRoles.filter(role => selectedRoles.includes(role.id))
+            username: username,
+            password: password,
+            roles: fetchedRoles.filter(role => selectedRoles.includes(role.id.toString()))
         };
+        // console.log(reqBody);
         fetch("api/auth/register", {
             headers: {
                 "Content-Type": "application/json",
             },
-            method: "post",
+            method: "POST",
             body: JSON.stringify(reqBody)
         })
             .then(response => {
+                console.log(response)
                 if (response.status === 201) {
-                    return response.json();
+                    // navigate("/login");
                 } else {
                     return Promise.reject("Invalid register attempt");
                 }
             })
             .then((body) => {
-                navigate("/login");
-            })
+                    console.log(body);
+                    navigate("/login");
+                }
+            )
             .catch((message) => {
-            alert(message);
-        });
+                alert(message);
+            });
     }
 
     return {
@@ -77,6 +95,8 @@ const useRegister = () => {
         selectedRoles,
         setSelectedRoles,
         sendRegisterRequest,
+        updateSelectedRole,
+        getButtonTitle
     }
 }
 

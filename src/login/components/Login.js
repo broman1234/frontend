@@ -16,7 +16,6 @@ const Login = () => {
             <div className="row justify-content-center">
                 <div className="col-md-4">
                     <h2 className="mb-4">Login</h2>
-                    <form>
                         <div className="form-group mb-3">
                             <label htmlFor="username">Username</label>
                             <input
@@ -46,7 +45,6 @@ const Login = () => {
                                 Login
                             </button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

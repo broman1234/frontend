@@ -34,7 +34,7 @@ const useLogin = () => {
                 }
             })
             .then(([body]) => {
-                user.setJwt(body.get("access_token"));
+                user.setJwt(body.access_token);
             }).catch((message) => {
             alert(message);
         });

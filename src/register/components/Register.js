@@ -1,6 +1,6 @@
 import React from 'react';
 import useRegister from "../actions/useRegister";
-import {DropdownButton, Dropdown} from'react-bootstrap';
+import {DropdownButton, Dropdown, Button} from 'react-bootstrap';
 
 const Register = () => {
     const {
@@ -9,9 +9,9 @@ const Register = () => {
         fetchedRoles,
         setUsername,
         setPassword,
-        selectedRoles,
-        setSelectedRoles,
-        sendRegisterRequest
+        sendRegisterRequest,
+        updateSelectedRole,
+        getButtonTitle
     } = useRegister()
 
     return (
@@ -19,7 +19,6 @@ const Register = () => {
             <div className="row justify-content-center">
                 <div className="col-md-4">
                     <h2 className="mb-4">Register</h2>
-                    <form>
                         <div className="form-group mb-3">
                             <label htmlFor="username">Username</label>
                             <input
@@ -44,9 +43,9 @@ const Register = () => {
                             <label htmlFor="roles">Roles</label>
                             <DropdownButton
                                 id="roles"
-                                title="Select Roles"
+                                title={getButtonTitle()}
                                 multiple
-                                onSelect={selectedValues => setSelectedRoles(selectedValues)}
+                                onSelect={selectedRole => updateSelectedRole(selectedRole)}
                             >
                                 {fetchedRoles.map(role => (
                                     <Dropdown.Item key={role.id} eventKey={role.id}>
@@ -56,15 +55,14 @@ const Register = () => {
                             </DropdownButton>
                         </div>
                         <div className="d-grid gap-2">
-                            <button
+                            <Button
                                 type="submit"
                                 className="btn btn-primary"
                                 onClick={sendRegisterRequest}
                             >
                                 Register
-                            </button>
+                            </Button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
