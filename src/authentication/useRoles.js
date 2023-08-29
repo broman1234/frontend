@@ -4,22 +4,34 @@ import useUser from "./useUser";
 
 const useRoles = () => {
     const user = useUser();
-    const [roles, setRoles] = useState([]);
+    const [decodedJwt, setDecodedJwt] = useState({
+        exp: null,
+        iat: null,
+        roles: [],
+        sub: ""
+    })
     const getRolesFromJWT = useCallback(() => {
         if (user.jwt) {
             const decodedJwt = jwt_decode(user.jwt);
-            return decodedJwt.roles;
+            console.log("decodedJwt=============", decodedJwt);
+            return decodedJwt;
         } else {
-            return [];
+            return {
+                exp: null,
+                iat: null,
+                roles: [],
+                sub: ""
+            };
         }
     }, [user.jwt]);
 
+
     useEffect(() => {
         console.log("JWT has changed", user.jwt);
-        setRoles(getRolesFromJWT());
+        setDecodedJwt(getRolesFromJWT());
     }, [user.jwt, getRolesFromJWT]);
 
-    return { roles };
+    return { decodedJwt };
 }
 
 export default useRoles;

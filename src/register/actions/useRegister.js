@@ -11,11 +11,7 @@ const useRegister = () => {
     const [selectedRoles, setSelectedRoles] = useState([]);
 
     useEffect(() => {
-        if (user.jwt) {
-            navigate("/dashboard");
-        } else {
-            fetchRoles();
-        }
+        fetchRoles();
     }, [navigate, user]);
 
     const updateSelectedRole = (selectedRole) => {
@@ -71,7 +67,6 @@ const useRegister = () => {
             .then(response => {
                 console.log(response)
                 if (response.status === 201) {
-                    // navigate("/login");
                 } else {
                     return Promise.reject("Invalid register attempt");
                 }
