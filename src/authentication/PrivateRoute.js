@@ -20,7 +20,7 @@ const PrivateRoute = (props) => {
             user.setJwt(data.access_token);
         })
     }
-    return user.jwt ? (props.children) : (<Navigate to="/login"/>);
+    return props.children
 };
 
 export default PrivateRoute;
