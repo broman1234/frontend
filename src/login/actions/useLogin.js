@@ -1,18 +1,16 @@
-import useUser from "../../authentication/useUser";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const useLogin = () => {
-    const user = useUser();
+const useLogin = (decodedJwt, user) => {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     useEffect(() => {
-        if (user.jwt) {
+        if (user.jwt && decodedJwt.exp >= Date.now() / 1000) {
             navigate("/dashboard");
         }
-    }, [navigate, user]);
+    }, [navigate, user.jwt, decodedJwt.exp]);
 
     const sendLoginRequest = () => {
         const reqBody = {

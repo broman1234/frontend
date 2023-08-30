@@ -31,7 +31,7 @@ const useRoles = () => {
         setDecodedJwt(getRolesFromJWT());
     }, [user.jwt, getRolesFromJWT]);
 
-    return { decodedJwt };
+    return { decodedJwt, user};
 }
 
 export default useRoles;

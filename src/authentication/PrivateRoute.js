@@ -1,26 +1,35 @@
-import React from 'react';
 import {Navigate} from "react-router-dom";
-import useUser from "./useUser";
 
-const PrivateRoute = (props) => {
-    const user = useUser();
+const PrivateRoute = ({decodedJwt, user, children}) => {
 
-    if (props.decodedJwt.sub === "" || props.decodedJwt.roles === []) {
-        return <Navigate to="/login"/>;
-    } else if (props.decodedJwt.exp < Date.now() / 1000) {
+    if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
+        return <Navigate to="/login" />;
+    } else if (decodedJwt.exp < Date.now() / 1000) {
         fetch("api/auth/token/refresh", {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.jwt
             },
             method: "get"
-        }).then(res => res.json()).then(data => {
-            if (data.error_message) {
-                return <Navigate to="/login"/>;
+        }).then(res => {
+            if (res.status === 200) {
+                return res.json();
+            } else {
+                return Promise.reject(res)
             }
-            user.setJwt(data.access_token);
         })
+            .then(data => {
+                console.log("===========", data.access_token);
+                user.setJwt(data.access_token);
+            })
+            .catch(error => {
+                error.json().then(data => {
+                    console.log("return error data: ", data);
+                    return <Navigate to="/login" />;
+                })
+            });
     }
-    return props.children
+    return children;
 };
 
 export default PrivateRoute;

@@ -2,14 +2,14 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useLogin from "../actions/useLogin";
 
-const Login = () => {
+const Login = ({decodedJwt, user}) => {
     const {
         username,
         password,
         setUsername,
         setPassword,
         sendLoginRequest
-    } = useLogin()
+    } = useLogin(decodedJwt, user)
 
     return (
         <div className="container mt-5">

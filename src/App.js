@@ -9,16 +9,15 @@ import PrivateRoute from "./authentication/PrivateRoute";
 
 function App() {
 
-    const {decodedJwt} = useRoles();
-    console.log("decodedJwt: ", decodedJwt);
+    const {decodedJwt, user} = useRoles();
 
     return (
         <Routes>
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<Login decodedJwt={decodedJwt} user={user}/>}/>
             <Route path="/register" element={<Register/>}/>
 
             <Route path="/dashboard" element={
-                <PrivateRoute decodedJwt={decodedJwt}>
+                <PrivateRoute decodedJwt={decodedJwt} user={user}>
                     {
                         decodedJwt.roles.find((role) => role === "ROLE_ADMIN") ?
                             <AdminDashboard/> : <Dashboard/>
