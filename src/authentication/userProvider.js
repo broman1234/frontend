@@ -5,7 +5,8 @@ const UserContext = createContext();
 
 const UserProvider = ({children}) => {
     const [jwt, setJwt] = useLocalState("", "jwt");
-    const value = {jwt, setJwt};
+    const [refreshJwt, setRefreshJwt] = useLocalState("", "refreshJwt")
+    const value = {jwt, setJwt, refreshJwt, setRefreshJwt};
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 };
 

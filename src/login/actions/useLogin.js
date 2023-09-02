@@ -33,6 +33,7 @@ const useLogin = (decodedJwt, user) => {
             })
             .then(([body]) => {
                 user.setJwt(body.access_token);
+                user.setRefreshJwt(body.refresh_token);
             }).catch((message) => {
             alert(message);
         });

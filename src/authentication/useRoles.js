@@ -12,9 +12,7 @@ const useRoles = () => {
     })
     const getRolesFromJWT = useCallback(() => {
         if (user.jwt) {
-            const decodedJwt = jwt_decode(user.jwt);
-            console.log("decodedJwt=============", decodedJwt);
-            return decodedJwt;
+            return jwt_decode(user.jwt);
         } else {
             return {
                 exp: null,
@@ -27,9 +25,8 @@ const useRoles = () => {
 
 
     useEffect(() => {
-        console.log("JWT has changed", user.jwt);
         setDecodedJwt(getRolesFromJWT());
-    }, [user.jwt, getRolesFromJWT]);
+    }, [user.jwt, getRolesFromJWT, user.refreshJwt]);
 
     return { decodedJwt, user};
 }

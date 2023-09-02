@@ -10,6 +10,7 @@ import PrivateRoute from "./authentication/PrivateRoute";
 function App() {
 
     const {decodedJwt, user} = useRoles();
+    console.log("JWT updated - New JWT:", user.jwt, "New Refresh JWT:", user.refreshJwt);
 
     return (
         <Routes>
