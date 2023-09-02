@@ -8,7 +8,8 @@ const Login = ({decodedJwt, user}) => {
         password,
         setUsername,
         setPassword,
-        sendLoginRequest
+        sendLoginRequest,
+        goToRegisterPage
     } = useLogin(decodedJwt, user)
 
     return (
@@ -43,6 +44,13 @@ const Login = ({decodedJwt, user}) => {
                                 onClick={sendLoginRequest}
                             >
                                 Login
+                            </button>
+                            <button
+                                type="submit"
+                                className="btn btn-primary"
+                                onClick={goToRegisterPage}
+                            >
+                                Register
                             </button>
                         </div>
                 </div>

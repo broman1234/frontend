@@ -39,12 +39,17 @@ const useLogin = (decodedJwt, user) => {
         });
     }
 
+    const goToRegisterPage = () => {
+        navigate("/register");
+    }
+
     return {
         username,
         password,
         setUsername,
         setPassword,
         sendLoginRequest,
+        goToRegisterPage
     }
 }
 

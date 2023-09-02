@@ -56,7 +56,6 @@ const useRegister = () => {
             password: password,
             roles: fetchedRoles.filter(role => selectedRoles.includes(role.id.toString()))
         };
-        // console.log(reqBody);
         fetch("api/auth/register", {
             headers: {
                 "Content-Type": "application/json",
