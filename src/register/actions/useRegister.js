@@ -9,6 +9,7 @@ const useRegister = () => {
     const [password, setPassword] = useState("");
     const [fetchedRoles, setFetchedRoles] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
         fetchRoles();
@@ -64,20 +65,22 @@ const useRegister = () => {
             body: JSON.stringify(reqBody)
         })
             .then(response => {
-                console.log(response)
+                console.log("response is =======", response);
                 if (response.status === 201) {
                 } else {
-                    return Promise.reject("Invalid register attempt");
+                    return Promise.reject(response);
                 }
             })
             .then((body) => {
-                    console.log(body);
                     navigate("/login");
                 }
             )
-            .catch((message) => {
-                alert(message);
-            });
+            .catch(error => {
+                error.text().then(message => {
+                    setErrorMessage(message);
+                });
+                }
+            );
     }
 
     return {
@@ -90,7 +93,8 @@ const useRegister = () => {
         setSelectedRoles,
         sendRegisterRequest,
         updateSelectedRole,
-        getButtonTitle
+        getButtonTitle,
+        errorMessage
     }
 }
 
