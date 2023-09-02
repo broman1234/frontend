@@ -5,6 +5,7 @@ const useLogin = (decodedJwt, user) => {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState()
 
     useEffect(() => {
         if (user.jwt && decodedJwt.exp >= Date.now() / 1000) {
@@ -28,14 +29,14 @@ const useLogin = (decodedJwt, user) => {
                 if (response.status === 200) {
                     return Promise.all([response.json()]);
                 } else {
-                    return Promise.reject("Invalid login attempt");
+                    return Promise.reject("Wrong username or password");
                 }
             })
             .then(([body]) => {
                 user.setJwt(body.access_token);
                 user.setRefreshJwt(body.refresh_token);
             }).catch((message) => {
-            alert(message);
+            setErrorMessage(message);
         });
     }
 
@@ -49,7 +50,8 @@ const useLogin = (decodedJwt, user) => {
         setUsername,
         setPassword,
         sendLoginRequest,
-        goToRegisterPage
+        goToRegisterPage,
+        errorMessage
     }
 }
 

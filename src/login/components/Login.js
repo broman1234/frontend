@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useLogin from "../actions/useLogin";
+import {Alert} from "react-bootstrap";
 
 const Login = ({decodedJwt, user}) => {
     const {
@@ -9,12 +10,18 @@ const Login = ({decodedJwt, user}) => {
         setUsername,
         setPassword,
         sendLoginRequest,
-        goToRegisterPage
+        goToRegisterPage,
+        errorMessage
     } = useLogin(decodedJwt, user)
 
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
+                {errorMessage &&
+                    <Alert key='danger' variant="danger">
+                        {errorMessage}
+                    </Alert>
+                }
                 <div className="col-md-4">
                     <h2 className="mb-4">Login</h2>
                         <div className="form-group mb-3">
