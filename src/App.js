@@ -2,7 +2,7 @@ import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Login from "./login/components/Login";
 import AdminDashboard from "./admin/AdminDashboard";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./dashboard/components/Dashboard";
 import Register from "./register/components/Register";
 import useRoles from "./authentication/useRoles";
 import PrivateRoute from "./authentication/PrivateRoute";
