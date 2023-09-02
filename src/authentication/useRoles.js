@@ -1,16 +1,10 @@
-import {useCallback, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import useUser from "./useUser";
 
 const useRoles = () => {
     const user = useUser();
-    const [decodedJwt, setDecodedJwt] = useState({
-        exp: null,
-        iat: null,
-        roles: [],
-        sub: ""
-    })
-    const getRolesFromJWT = useCallback(() => {
+    console.log("in userRoles", user.jwt, user.refreshJwt);
+    const getRolesFromJWT = () => {
         if (user.jwt) {
             return jwt_decode(user.jwt);
         } else {
@@ -21,12 +15,9 @@ const useRoles = () => {
                 sub: ""
             };
         }
-    }, [user.jwt]);
+    };
 
-
-    useEffect(() => {
-        setDecodedJwt(getRolesFromJWT());
-    }, [user.jwt, getRolesFromJWT, user.refreshJwt]);
+    const decodedJwt = getRolesFromJWT();
 
     return { decodedJwt, user};
 }
