@@ -5,7 +5,7 @@ import AddBookModal from "./AddBookModal";
 
 const BookSupplementation = () => {
 
-    const {addBook} = useBookSupplementation();
+    const {showAddBookModal, isOpen, hideAddBookModal} = useBookSupplementation();
 
     return (
         <div>
@@ -13,13 +13,16 @@ const BookSupplementation = () => {
                 <Col className="d-flex justify-content-center">
                     <Button
                         className="btn btn-primary"
-                        onClick={addBook}
+                        onClick={showAddBookModal}
                     >
                         Add Book
                     </Button>
                 </Col>
             </Row>
-            <AddBookModal />
+            <AddBookModal
+                isOpen={isOpen}
+                hideAddBookModal={hideAddBookModal}
+            />
         </div>
     );
 };

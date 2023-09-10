@@ -4,11 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import {Col, Row} from "react-bootstrap";
 
-const AddBookModal = () => {
+const AddBookModal = ({isOpen, hideAddBookModal}) => {
     return (
         <div>
             <Modal
-                show={true}
+                show={isOpen}
                 size="lg"
                 centered
             >
@@ -54,7 +54,12 @@ const AddBookModal = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary">Close</Button>
+                    <Button
+                        variant="secondary"
+                        onClick={hideAddBookModal}
+                    >
+                        Close
+                    </Button>
                     <Button variant="primary">Submit</Button>
                 </Modal.Footer>
             </Modal>
