@@ -1,22 +1,27 @@
 import React from 'react';
 import useDashboard from "../actions/useDashboard";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import BookSupplementation from "../bookSupplementation/components/BookSupplementation";
 
 const AdminDashboard = () => {
     const {logOut} = useDashboard();
 
     return (
         <>
-            <div className="float-right">
-                <button
-                    className="btn btn-danger"
-                    onClick={logOut}
-                >
-                    Log Out
-                </button>
-            </div>
-            <div>
-                Admin Dashboard
-            </div>
+            <Container fluid={true}>
+                <Row>
+                    <Col className="d-flex justify-content-end">
+                        <Button
+                            className="btn btn-secondary"
+                            onClick={logOut}
+                        >
+                            Logout
+                        </Button>
+                    </Col>
+                </Row>
+                <BookSupplementation />
+
+            </Container>
         </>
     );
 };
