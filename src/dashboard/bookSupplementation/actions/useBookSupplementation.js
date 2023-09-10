@@ -1,16 +1,23 @@
 import {useState} from "react";
 
 const useBookSupplementation = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isAddBookModalOpen, setIsAddBookModalOpen] = useState(false)
+    const [isAddBookSuccessBannerOpen, setIsAddBookSuccessBannerOpen] = useState(false)
 
     const showAddBookModal = () => {
-        setIsOpen(true)
+        setIsAddBookModalOpen(true)
     }
 
     const hideAddBookModal = () => {
-        setIsOpen(false)
+        setIsAddBookModalOpen(false)
     }
-    return {showAddBookModal, isOpen, hideAddBookModal}
+    return {
+        showAddBookModal,
+        isAddBookModalOpen,
+        hideAddBookModal,
+        isAddBookSuccessBannerOpen,
+        setIsAddBookSuccessBannerOpen
+    }
 }
 
 export default useBookSupplementation

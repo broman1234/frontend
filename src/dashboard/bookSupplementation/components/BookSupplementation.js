@@ -1,14 +1,27 @@
 import React from 'react';
-import {Button, Col, Row} from "react-bootstrap";
+import {Alert, Button, Col, Row} from "react-bootstrap";
 import useBookSupplementation from "../actions/useBookSupplementation";
 import AddBookModal from "./AddBookModal";
 
 const BookSupplementation = () => {
 
-    const {showAddBookModal, isOpen, hideAddBookModal} = useBookSupplementation();
+    const {
+        showAddBookModal,
+        isAddBookModalOpen,
+        hideAddBookModal,
+        isAddBookSuccessBannerOpen,
+        setIsAddBookSuccessBannerOpen
+    } = useBookSupplementation();
 
     return (
         <div>
+            <Row>
+                <Col>
+                    <Alert key={'success'} variant={'success'} show={isAddBookSuccessBannerOpen}>
+                        You've just added a book successfully!
+                    </Alert>
+                </Col>
+            </Row>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Button
@@ -20,8 +33,9 @@ const BookSupplementation = () => {
                 </Col>
             </Row>
             <AddBookModal
-                isOpen={isOpen}
+                isOpen={isAddBookModalOpen}
                 hideAddBookModal={hideAddBookModal}
+                setIsAddBookSuccessBannerOpen={setIsAddBookSuccessBannerOpen}
             />
         </div>
     );

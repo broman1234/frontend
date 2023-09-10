@@ -3,8 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import {Col, Row} from "react-bootstrap";
+import useAddBookModal from "../actions/useAddBookModal";
 
-const AddBookModal = ({isOpen, hideAddBookModal}) => {
+const AddBookModal = ({isOpen, hideAddBookModal, setIsAddBookSuccessBannerOpen}) => {
+    const {submitNewBook, bookInfo, setBookInfo} = useAddBookModal(hideAddBookModal, setIsAddBookSuccessBannerOpen);
+
     return (
         <div>
             <Modal
@@ -24,7 +27,11 @@ const AddBookModal = ({isOpen, hideAddBookModal}) => {
                                 Title
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="title" placeholder="Title" />
+                                <Form.Control type="title" placeholder="Title" value={bookInfo.title}
+                                              onChange={event => setBookInfo({
+                                                  ...bookInfo,
+                                                  title: event.target.value
+                                              })}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
@@ -32,7 +39,11 @@ const AddBookModal = ({isOpen, hideAddBookModal}) => {
                                 Author
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="author" placeholder="Author" />
+                                <Form.Control type="author" placeholder="Author" value={bookInfo.author}
+                                              onChange={event => setBookInfo({
+                                                  ...bookInfo,
+                                                  author: event.target.value
+                                              })}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextCategory">
@@ -40,7 +51,11 @@ const AddBookModal = ({isOpen, hideAddBookModal}) => {
                                 Category
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="category" placeholder="Category" />
+                                <Form.Control type="category" placeholder="Category" value={bookInfo.category}
+                                              onChange={event => setBookInfo({
+                                                  ...bookInfo,
+                                                  category: event.target.value
+                                              })}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPublisher">
@@ -48,7 +63,11 @@ const AddBookModal = ({isOpen, hideAddBookModal}) => {
                                 Publisher
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="publisher" placeholder="Publisher" />
+                                <Form.Control type="publisher" placeholder="Publisher" value={bookInfo.publisher}
+                                              onChange={event => setBookInfo({
+                                                  ...bookInfo,
+                                                  publisher: event.target.value
+                                              })}/>
                             </Col>
                         </Form.Group>
                     </Form>
@@ -60,7 +79,12 @@ const AddBookModal = ({isOpen, hideAddBookModal}) => {
                     >
                         Close
                     </Button>
-                    <Button variant="primary">Submit</Button>
+                    <Button
+                        variant="primary"
+                        onClick={submitNewBook}
+                    >
+                        Submit
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>
