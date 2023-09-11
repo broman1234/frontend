@@ -1,17 +1,16 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import useRoles from "./useRoles";
 
-const PrivateRoute = ({ decodedJwt, user, children }) => {
+const PrivateRoute = ({ children }) => {
+    const {decodedJwt, user} = useRoles();
+
     const navigate = useNavigate();
-
-    console.log("private route component has been rendered", decodedJwt.sub, decodedJwt.roles, user.jwt, user.refreshJwt);
 
     useEffect(() => {
         if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
-            console.log("not authenticated=============", decodedJwt.exp);
             navigate("/login");
         } else if (decodedJwt.exp < Date.now() / 1000) {
-            console.log("access jwt has expired=============");
             fetch("api/auth/token/refresh", {
                 headers: {
                     "Content-Type": "application/json",
@@ -30,7 +29,6 @@ const PrivateRoute = ({ decodedJwt, user, children }) => {
                 })
                 .catch(error => {
                     error.json().then(data => {
-                        console.log("return error data: ", data);
                         navigate("/login");
                     })
                 });

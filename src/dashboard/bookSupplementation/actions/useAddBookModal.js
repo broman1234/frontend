@@ -3,6 +3,7 @@ import useUser from "../../../authentication/useUser";
 
 const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen) => {
     const user = useUser()
+    console.log("jwt has been updated in addBookModal=====================", user.jwt)
     const [bookInfo, setBookInfo] = useState({
         title: "",
         author: "",

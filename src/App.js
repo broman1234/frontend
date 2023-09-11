@@ -10,7 +10,7 @@ import PrivateRoute from "./authentication/PrivateRoute";
 function App() {
 
     const {decodedJwt, user} = useRoles();
-    console.log("JWT updated - New JWT:", user.jwt, "New Refresh JWT:", user.refreshJwt, decodedJwt.roles);
+    console.log("jwt has been updated in App==========", user.jwt)
 
     return (
         <Routes>
@@ -18,7 +18,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
 
             <Route path="/dashboard" element={
-                <PrivateRoute decodedJwt={decodedJwt} user={user}>
+                <PrivateRoute>
                     {
                         decodedJwt.roles.find((role) => role === "ROLE_ADMIN") ?
                             <AdminDashboard/> : <Dashboard/>

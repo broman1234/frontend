@@ -21,12 +21,10 @@ const useRegister = () => {
     }
 
     const getButtonTitle = () => {
-        const buttonTitle = fetchedRoles
+        return fetchedRoles
             .filter(fetchedRole => selectedRoles.includes(fetchedRole.id.toString()))
             .map(role => role.roleName)
             .join(', ');
-        console.log(buttonTitle)
-        return buttonTitle;
     }
 
     const fetchRoles = () => {
@@ -65,7 +63,6 @@ const useRegister = () => {
             body: JSON.stringify(reqBody)
         })
             .then(response => {
-                console.log("response is =======", response);
                 if (response.status === 201) {
                 } else {
                     return Promise.reject(response);
