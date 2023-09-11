@@ -1,16 +1,17 @@
-import {useState} from "react";
-import useUser from "../../../authentication/useUser";
+import {useEffect, useState} from "react";
+import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 
 const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen) => {
-    const user = useUser()
-    console.log("jwt has been updated in addBookModal=====================", user.jwt)
+    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
     const [bookInfo, setBookInfo] = useState({
         title: "",
         author: "",
         category: "",
         publisher: ""
     })
+    console.log("jwt has been updated in addBookModal=====================", user.jwt)
 
+    useEffect(validateAndRefreshJwt, [validateAndRefreshJwt])
 
     const submitNewBook = () => {
         const reqBody = {
