@@ -3,7 +3,7 @@ import {Alert, Button, Col, Row} from "react-bootstrap";
 import useBookSupplementation from "../actions/useBookSupplementation";
 import AddBookModal from "./AddBookModal";
 
-const BookSupplementation = () => {
+const BookSupplementation = ({setBooks, books}) => {
 
     const {
         showAddBookModal,
@@ -36,6 +36,8 @@ const BookSupplementation = () => {
                 isOpen={isAddBookModalOpen}
                 hideAddBookModal={hideAddBookModal}
                 setIsAddBookSuccessBannerOpen={setIsAddBookSuccessBannerOpen}
+                setBooks={setBooks}
+                books={books}
             />
         </div>
     );

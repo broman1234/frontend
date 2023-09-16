@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 
-const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen) => {
+const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen, setBooks, books) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -29,16 +29,18 @@ const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen) => {
             method: "post",
             body: JSON.stringify(reqBody)
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    setIsAddBookSuccessBannerOpen(true);
-
-                    setTimeout(() => {
-                        setIsAddBookSuccessBannerOpen(false);
-                    }, 5000);
-                }
-            }).catch((message) => {
-
+            .then((response) =>
+                response.json())
+            .then(book => {
+                const updatedBooks = [...books, book];
+                setBooks(updatedBooks);
+                setIsAddBookSuccessBannerOpen(true);
+                setTimeout(() => {
+                    setIsAddBookSuccessBannerOpen(false);
+                }, 5000);
+            })
+            .catch((error) => {
+                //TODO: handle error
             }).finally(
             hideAddBookModal()
         );

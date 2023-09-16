@@ -1,11 +1,12 @@
 import React from 'react';
 import useDashboard from "../actions/useDashboard";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import BookSupplementation from "../bookSupplementation/components/BookSupplementation";
+import BookSupplementation from "../booksupplementation/components/BookSupplementation";
+import BookTable from "../booktable/components/BookTable";
 
 const AdminDashboard = () => {
     console.log("go into AdminDashboard!========");
-    const {logOut} = useDashboard();
+    const {logOut, books, setBooks} = useDashboard();
 
     return (
         <>
@@ -20,8 +21,8 @@ const AdminDashboard = () => {
                         </Button>
                     </Col>
                 </Row>
-                <BookSupplementation />
-
+                <BookSupplementation setBooks={setBooks} books={books}/>
+                <BookTable setBooks={setBooks} books={books}/>
             </Container>
         </>
     );
