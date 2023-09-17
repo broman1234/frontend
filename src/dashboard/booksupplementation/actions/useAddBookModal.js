@@ -1,7 +1,8 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
+import {BannerContext} from "../../../banner/BannerProvider";
 
-const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen, setBooks, books) => {
+const useAddBookModal = (hideAddBookModal, setBooks, books) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -9,7 +10,7 @@ const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen, setBoo
         category: "",
         publisher: ""
     })
-    console.log("jwt has been updated in addBookModal=====================", user.jwt)
+    const {setIsShowBanner, setBannerStyle, setBannerMessage} = useContext(BannerContext);
 
     useEffect(validateAndRefreshJwt, [validateAndRefreshJwt])
 
@@ -34,9 +35,11 @@ const useAddBookModal = (hideAddBookModal, setIsAddBookSuccessBannerOpen, setBoo
             .then(book => {
                 const updatedBooks = [...books, book];
                 setBooks(updatedBooks);
-                setIsAddBookSuccessBannerOpen(true);
+                setIsShowBanner(true);
+                setBannerStyle("success");
+                setBannerMessage("You've just added a book successfully!");
                 setTimeout(() => {
-                    setIsAddBookSuccessBannerOpen(false);
+                    setIsShowBanner(false);
                 }, 5000);
             })
             .catch((error) => {

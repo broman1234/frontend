@@ -5,12 +5,12 @@ import Form from 'react-bootstrap/Form';
 import {Col, Row} from "react-bootstrap";
 import useAddBookModal from "../actions/useAddBookModal";
 
-const AddBookModal = ({isOpen, hideAddBookModal, setIsAddBookSuccessBannerOpen, setBooks, books}) => {
+const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books}) => {
     const {
         submitNewBook,
         bookInfo,
         setBookInfo
-    } = useAddBookModal(hideAddBookModal, setIsAddBookSuccessBannerOpen, setBooks, books);
+    } = useAddBookModal(hideAddBookModal, setBooks, books);
 
     return (
         <div>

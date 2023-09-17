@@ -9,16 +9,17 @@ const BookSupplementation = ({setBooks, books}) => {
         showAddBookModal,
         isAddBookModalOpen,
         hideAddBookModal,
-        isAddBookSuccessBannerOpen,
-        setIsAddBookSuccessBannerOpen
+        isShowBanner,
+        bannerStyle,
+        bannerMessage
     } = useBookSupplementation();
 
     return (
         <div>
             <Row>
                 <Col>
-                    <Alert key={'success'} variant={'success'} show={isAddBookSuccessBannerOpen}>
-                        You've just added a book successfully!
+                    <Alert key={bannerStyle} variant={bannerStyle} show={isShowBanner}>
+                        {bannerMessage}
                     </Alert>
                 </Col>
             </Row>
@@ -35,7 +36,6 @@ const BookSupplementation = ({setBooks, books}) => {
             <AddBookModal
                 isOpen={isAddBookModalOpen}
                 hideAddBookModal={hideAddBookModal}
-                setIsAddBookSuccessBannerOpen={setIsAddBookSuccessBannerOpen}
                 setBooks={setBooks}
                 books={books}
             />

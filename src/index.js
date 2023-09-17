@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {UserProvider} from "./authentication/userProvider";
+import {BannerProvider} from "./banner/BannerProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
         <UserProvider>
-            <App/>
+            <BannerProvider>
+                <App/>
+            </BannerProvider>
         </UserProvider>
     </BrowserRouter>
 );
