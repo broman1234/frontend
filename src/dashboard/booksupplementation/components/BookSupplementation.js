@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Button, Col, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 import useBookSupplementation from "../actions/useBookSupplementation";
 import AddBookModal from "./AddBookModal";
 import Banner from "../../../banner/Banner";

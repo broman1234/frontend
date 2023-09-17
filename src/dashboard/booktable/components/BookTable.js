@@ -11,10 +11,10 @@ const BookTable = ({setBooks, books}) => {
     const [isShowBookTableErrorBanner, setIsShowBookTableErrorBanner] = useState(false);
     const [pageInfo, setPageInfo] = useState({
         "firstPage": 1,
-        "lastPage": null,
-        "middlePage": null,
-        "totalElements": null,
-        "pageSize": null,
+        "lastPage": 0,
+        "middlePage": 0,
+        "totalElements": 0,
+        "pageSize": 0,
         "currentPage": 1,
     })
 
@@ -52,7 +52,7 @@ const BookTable = ({setBooks, books}) => {
             })
     }
 
-    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt]);
+    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt, books.length]);
 
 
     return (
