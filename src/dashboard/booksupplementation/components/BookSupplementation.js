@@ -10,14 +10,15 @@ const BookSupplementation = ({setBooks, books}) => {
         showAddBookModal,
         isAddBookModalOpen,
         hideAddBookModal,
-        isShowBanner,
+        isShowAddBookSuccessBanner,
+        setIsShowAddBookSuccessBanner,
         bannerStyle,
         bannerMessage
     } = useBookSupplementation();
 
     return (
         <div>
-            <Banner isShowBanner={isShowBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}/>
+            <Banner isShowBanner={isShowAddBookSuccessBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}/>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Button
@@ -33,6 +34,7 @@ const BookSupplementation = ({setBooks, books}) => {
                 hideAddBookModal={hideAddBookModal}
                 setBooks={setBooks}
                 books={books}
+                setIsShowAddBookSuccessBanner={setIsShowAddBookSuccessBanner}
             />
         </div>
     );

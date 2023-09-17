@@ -3,7 +3,8 @@ import {BannerContext} from "../../../banner/BannerProvider";
 
 const useBookSupplementation = () => {
     const [isAddBookModalOpen, setIsAddBookModalOpen] = useState(false)
-    const {isShowBanner, bannerStyle, bannerMessage} = useContext(BannerContext);
+    const {bannerStyle, bannerMessage} = useContext(BannerContext);
+    const [isShowAddBookSuccessBanner, setIsShowAddBookSuccessBanner] = useState(false);
 
     const showAddBookModal = () => {
         setIsAddBookModalOpen(true)
@@ -16,7 +17,8 @@ const useBookSupplementation = () => {
         showAddBookModal,
         isAddBookModalOpen,
         hideAddBookModal,
-        isShowBanner,
+        isShowAddBookSuccessBanner,
+        setIsShowAddBookSuccessBanner,
         bannerStyle,
         bannerMessage
     }
