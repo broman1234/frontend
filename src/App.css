@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white; /* 如果需要背景色 */
+  padding: 10px; /* 根据需要调整间距 */
+  z-index: 999; /* 根据需要调整 z-index，以确保它位于页面上其他元素之上 */
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
