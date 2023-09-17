@@ -30,8 +30,12 @@ const useAddBookModal = (hideAddBookModal, setBooks, books) => {
             method: "post",
             body: JSON.stringify(reqBody)
         })
-            .then((response) =>
-                response.json())
+            .then((response) => {
+                if (response.status !== 201) {
+                    return Promise.reject(response);
+                }
+                return response.json();
+            })
             .then(book => {
                 const updatedBooks = [...books, book];
                 setBooks(updatedBooks);
@@ -41,12 +45,18 @@ const useAddBookModal = (hideAddBookModal, setBooks, books) => {
                 setTimeout(() => {
                     setIsShowBanner(false);
                 }, 5000);
+                hideAddBookModal()
             })
             .catch((error) => {
-                //TODO: handle error
-            }).finally(
-            hideAddBookModal()
-        );
+               error.text().then(errorMessage => {
+                   setIsShowBanner(true);
+                   setBannerStyle('danger');
+                   setBannerMessage(errorMessage);
+                   setTimeout(() => {
+                       setIsShowBanner(false);
+                   }, 5000);
+               })
+            })
     }
     return {submitNewBook, bookInfo, setBookInfo}
 }

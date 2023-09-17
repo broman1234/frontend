@@ -72,7 +72,7 @@ const useRegister = () => {
                     navigate("/login");
                 }
             )
-            .catch(error => {
+            .catch((error) => {
                 error.text().then(message => {
                     setErrorMessage(message);
                 });
