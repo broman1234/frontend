@@ -1,16 +1,17 @@
 import React from 'react';
 import {Alert, Col, Row} from "react-bootstrap";
 
-const Banner = ({isShowBanner, bannerStyle, bannerMessage}) => {
+const Banner = ({isShowBanner, bannerStyle, bannerMessage, children}) => {
 
     return (
-        <Row>
+        isShowBanner ?
+        <Row className="mt-3">
             <Col>
                 <Alert key={bannerStyle} variant={bannerStyle} show={isShowBanner}>
                     {bannerMessage}
                 </Alert>
             </Col>
-        </Row>
+        </Row> : children
     );
 };
 
