@@ -12,12 +12,21 @@ const BookTable = ({setBooks, books}) => {
     const [pageInfo, setPageInfo] = useState({
         "firstPage": 1,
         "lastPage": null,
+        "middlePage": null,
         "totalElements": null,
-        "pageSize": null
+        "pageSize": null,
+        "currentPage": 1,
     })
 
+    const handlePageClick = (pageNumber) => {
+        setPageInfo({
+            ...pageInfo,
+            currentPage: pageNumber
+        });
+    };
+
     const fetchBooks = () => {
-        fetch("api/admin/books", {
+        fetch(`api/admin/books?page=${pageInfo.currentPage - 1}`, {
             headers: {
                 "Authorization": "Bearer " + user.jwt
             },
@@ -31,8 +40,9 @@ const BookTable = ({setBooks, books}) => {
                 setPageInfo({
                     ...pageInfo,
                     "lastPage": data.totalPages,
+                    "middlePage": Math.floor((1 + data.totalPages) / 2),
                     "totalElements": data.totalElements,
-                    "pageSize": data.size,
+                    "pageSize": data.size
                 })
             })
             .catch(() => {
@@ -42,7 +52,7 @@ const BookTable = ({setBooks, books}) => {
             })
     }
 
-    useEffect(fetchBooks, [setBannerMessage, setBannerStyle, setBooks, user.jwt]);
+    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt]);
 
 
     return (
@@ -76,18 +86,38 @@ const BookTable = ({setBooks, books}) => {
                 <Col className="d-flex justify-content-center">
                     {pageInfo.lastPage < 10 ? <Pagination>
                         {[...Array(pageInfo.lastPage).keys()].map(
-                            pageNumber => <Pagination.Item>{pageNumber + 1}</Pagination.Item>
+                            pageNumber =>
+                                <Pagination.Item key={pageNumber}
+                                                 onClick={() => handlePageClick(pageNumber + 1)}
+                                                 active={pageNumber + 1 === pageInfo.currentPage}>{pageNumber + 1}
+                                </Pagination.Item>
                         )}
                     </Pagination> : <Pagination>
-                        <Pagination.First/>
-                        <Pagination.Prev/>
-                        <Pagination.Item>{pageInfo.firstPage}</Pagination.Item>
-                        <Pagination.Ellipsis/>
-                        <Pagination.Item>{Math.floor((pageInfo.firstPage + pageInfo.lastPage) / 2)}</Pagination.Item>
-                        <Pagination.Ellipsis/>
-                        <Pagination.Item>{pageInfo.lastPage}</Pagination.Item>
-                        <Pagination.Next/>
-                        <Pagination.Last/>
+                        <Pagination.First
+                            onClick={() => handlePageClick(pageInfo.firstPage)}
+                        />
+                        <Pagination.Prev
+                            onClick={() => handlePageClick(pageInfo.currentPage - 1)}
+                            disabled={pageInfo.currentPage <= pageInfo.firstPage}
+                        />
+                        <Pagination.Item
+                            onClick={() => handlePageClick(pageInfo.firstPage)}
+                            active={pageInfo.firstPage === pageInfo.currentPage}>{pageInfo.firstPage}</Pagination.Item>
+                        <Pagination.Ellipsis disabled/>
+                        <Pagination.Item
+                            onClick={() => handlePageClick(pageInfo.middlePage)}
+                            active={pageInfo.middlePage === pageInfo.currentPage}>{pageInfo.middlePage}</Pagination.Item>
+                        <Pagination.Ellipsis disabled/>
+                        <Pagination.Item
+                            onClick={() => handlePageClick(pageInfo.lastPage)}
+                            active={pageInfo.lastPage === pageInfo.currentPage}>{pageInfo.lastPage}</Pagination.Item>
+                        <Pagination.Next
+                            onClick={() => handlePageClick(pageInfo.currentPage + 1)}
+                            disabled={pageInfo.currentPage >= pageInfo.lastPage}
+                        />
+                        <Pagination.Last
+                            onClick={() => handlePageClick(pageInfo.lastPage)}
+                        />
                     </Pagination>}
                 </Col>
             </Row>
