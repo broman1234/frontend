@@ -9,7 +9,8 @@ const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books}) => {
     const {
         submitNewBook,
         bookInfo,
-        setBookInfo
+        setBookInfo,
+        addBookErrorMessage
     } = useAddBookModal(hideAddBookModal, setBooks, books);
 
     return (
@@ -74,6 +75,7 @@ const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books}) => {
                                               })}/>
                             </Col>
                         </Form.Group>
+                        <Form.Text className="text-danger">{addBookErrorMessage}</Form.Text>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

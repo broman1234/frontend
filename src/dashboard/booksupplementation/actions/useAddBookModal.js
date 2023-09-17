@@ -10,6 +10,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books) => {
         category: "",
         publisher: ""
     })
+    const [addBookErrorMessage, setAddBookErrorMessage] = useState("");
     const {setIsShowBanner, setBannerStyle, setBannerMessage} = useContext(BannerContext);
 
     useEffect(validateAndRefreshJwt, [validateAndRefreshJwt])
@@ -45,20 +46,16 @@ const useAddBookModal = (hideAddBookModal, setBooks, books) => {
                 setTimeout(() => {
                     setIsShowBanner(false);
                 }, 5000);
+                setAddBookErrorMessage("");
                 hideAddBookModal()
             })
             .catch((error) => {
                error.text().then(errorMessage => {
-                   setIsShowBanner(true);
-                   setBannerStyle('danger');
-                   setBannerMessage(errorMessage);
-                   setTimeout(() => {
-                       setIsShowBanner(false);
-                   }, 5000);
+                   setAddBookErrorMessage(errorMessage);
                })
             })
     }
-    return {submitNewBook, bookInfo, setBookInfo}
+    return {submitNewBook, bookInfo, setBookInfo, addBookErrorMessage}
 }
 
 export default useAddBookModal
