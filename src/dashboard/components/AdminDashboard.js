@@ -3,6 +3,7 @@ import useDashboard from "../actions/useDashboard";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import BookSupplementation from "../booksupplementation/components/BookSupplementation";
 import BookTable from "../booktable/components/BookTable";
+import SearchArea from "../searcharea";
 
 const AdminDashboard = () => {
     console.log("go into AdminDashboard!========");
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
                     </Col>
                 </Row>
                 <BookSupplementation setBooks={setBooks} books={books}/>
+                <SearchArea />
                 <BookTable setBooks={setBooks} books={books}/>
             </Container>
         </>
