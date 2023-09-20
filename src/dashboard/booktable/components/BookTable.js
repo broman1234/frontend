@@ -26,7 +26,7 @@ const BookTable = ({setBooks, books}) => {
     };
 
     const fetchBooks = () => {
-        fetch(`api/admin/books?page=${pageInfo.currentPage - 1}`, {
+        fetch(`api/admin/books/all?page=${pageInfo.currentPage - 1}`, {
             headers: {
                 "Authorization": "Bearer " + user.jwt
             },
