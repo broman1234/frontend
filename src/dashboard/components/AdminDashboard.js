@@ -2,7 +2,7 @@ import React from 'react';
 import useDashboard from "../actions/useDashboard";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import BookSupplementation from "../booksupplementation/components/BookSupplementation";
-import BookTable from "../booktable/components/BookTable";
+import BookTable from "../booktable/components";
 
 const AdminDashboard = () => {
     const {logOut, books, setBooks} = useDashboard();
