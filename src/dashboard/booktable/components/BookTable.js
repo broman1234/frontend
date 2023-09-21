@@ -3,12 +3,20 @@ import {Col, Container, Pagination, Row, Table} from "react-bootstrap";
 import useUser from "../../../authentication/useUser";
 import {BannerContext} from "../../../banner/BannerProvider";
 import Banner from "../../../banner/Banner";
+import SearchArea from "../../searcharea";
 
 const BookTable = ({setBooks, books}) => {
 
     const user = useUser();
     const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle} = useContext(BannerContext);
     const [isShowBookTableErrorBanner, setIsShowBookTableErrorBanner] = useState(false);
+    const [bookRequest, setBookRequest] = useState({
+        title: "",
+        author: "",
+        category: "",
+        publisher: "",
+    });
+
     const [pageInfo, setPageInfo] = useState({
         "firstPage": 1,
         "lastPage": 0,
@@ -26,14 +34,23 @@ const BookTable = ({setBooks, books}) => {
     };
 
     const fetchBooks = () => {
-        fetch(`api/admin/books/all?page=${pageInfo.currentPage - 1}`, {
+        const queryParams = new URLSearchParams();
+        queryParams.append("page", (pageInfo.currentPage - 1).toString());
+        queryParams.append("title", bookRequest.title);
+        queryParams.append("author", bookRequest.author);
+        queryParams.append("category", bookRequest.category);
+        queryParams.append("publisher", bookRequest.publisher);
+        fetch(`api/admin/books?${queryParams.toString()}`, {
             headers: {
                 "Authorization": "Bearer " + user.jwt
             },
             method: "get"
         })
-            .then((response) =>
-                response.json()
+            .then((response) =>{
+                    console.log("response: ========", response);
+                    return response.json()
+            }
+
             )
             .then(data => {
                 setBooks(data.content);
@@ -57,6 +74,7 @@ const BookTable = ({setBooks, books}) => {
 
     return (
         <Banner isShowBanner={isShowBookTableErrorBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}>
+            <SearchArea bookRequest={bookRequest} setBookRequest={setBookRequest} fetchBooks={fetchBooks}/>
             <Table striped bordered hover className="mt-3">
                 <thead>
                 <tr>

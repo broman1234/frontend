@@ -38,6 +38,10 @@
   z-index: 999; /* 根据需要调整 z-index，以确保它位于页面上其他元素之上 */
 }
 
+.search-area {
+  background-color: cadetblue;
+}
+
 
 @keyframes App-logo-spin {
   from {

@@ -6,7 +6,6 @@ const useValidateAndRefreshJwt = () => {
     const navigate = useNavigate();
 
     const validateAndRefreshJwt = () => {
-        console.log("start to invoke useEffect method!========")
         if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
             navigate("/login");
         } else if (decodedJwt.exp < Date.now() / 1000) {
