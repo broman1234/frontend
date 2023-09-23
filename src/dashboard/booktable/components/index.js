@@ -15,7 +15,10 @@ const BookTable = ({setBooks, books}) => {
         setBookRequest,
         pageInfo,
         handlePageClick,
-        fetchBooks
+        fetchBooks,
+        sortField,
+        sortOrder,
+        handleSort
     } = useBookTable(setBooks, books);
 
     return (
@@ -25,24 +28,38 @@ const BookTable = ({setBooks, books}) => {
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Category</th>
-                    <th>Publisher</th>
+                    <th onClick={() => handleSort('title')}>
+                        <div className="d-flex justify-content-between">
+                            Title {sortField === 'title' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                        </div>
+                    </th>
+                    <th onClick={() => handleSort('author')}>
+                        <div className="d-flex justify-content-between">
+                            Author {sortField === 'author' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                        </div>
+                    </th>
+                    <th onClick={() => handleSort('category')}>
+                        <div className="d-flex justify-content-between">
+                            Category {sortField === 'category' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                        </div>
+                    </th>
+                    <th onClick={() => handleSort('publisher')}>
+                        <div className="d-flex justify-content-between">
+                            Publisher {sortField === 'publisher' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                        </div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 {books.map((book) => {
                     let bookIndex = books.indexOf(book);
-                    return (
-                        <tr key={bookIndex}>
+                    return (<tr key={bookIndex}>
                             <td>{bookIndex + 1}</td>
                             <td>{book.title}</td>
                             <td>{book.author}</td>
                             <td>{book.category}</td>
                             <td>{book.publisher}</td>
-                        </tr>
-                    )
+                        </tr>)
                 })}
                 </tbody>
             </Table>

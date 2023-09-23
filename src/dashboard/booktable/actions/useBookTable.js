@@ -12,7 +12,6 @@ const useBookTable = (setBooks, books) => {
         category: "",
         publisher: "",
     });
-
     const [pageInfo, setPageInfo] = useState({
         "firstPage": 1,
         "lastPage": 0,
@@ -21,6 +20,26 @@ const useBookTable = (setBooks, books) => {
         "pageSize": 0,
         "currentPage": 1,
     })
+    const [sortField, setSortField] = useState(null);
+    const [sortOrder, setSortOrder] = useState(null);
+
+    const handleSort = (field) => {
+        const sortedBooks = [...books].sort((a, b) => {
+            if (a[field] < b[field]) return  -1;
+            if (a[field] > b[field]) return 1;
+            return 0;
+        });
+        if (sortField !== field) {
+            setSortField(field);
+            setSortOrder('asc');
+        } else if (sortOrder === 'asc') {
+            sortedBooks.reverse();
+            setSortOrder('desc');
+        } else {
+            setSortOrder('asc');
+        }
+        setBooks(sortedBooks);
+    }
 
     const handlePageClick = (pageNumber) => {
         setPageInfo({
@@ -79,7 +98,10 @@ const useBookTable = (setBooks, books) => {
         pageInfo,
         setPageInfo,
         handlePageClick,
-        fetchBooks
+        fetchBooks,
+        sortField,
+        sortOrder,
+        handleSort
     };
 }
 
