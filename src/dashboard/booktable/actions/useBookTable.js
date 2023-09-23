@@ -49,6 +49,8 @@ const useBookTable = (setBooks, books) => {
     };
 
     const fetchBooks = () => {
+        setSortField(null);
+        setSortOrder(null);
         const queryParams = new URLSearchParams();
         queryParams.append("page", (pageInfo.currentPage - 1).toString());
         queryParams.append("title", bookRequest.title);
