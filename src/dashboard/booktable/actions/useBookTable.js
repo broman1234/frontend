@@ -22,6 +22,11 @@ const useBookTable = (setBooks, books) => {
     })
     const [sortField, setSortField] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
+    const [isShowEditBookModal, setIsShowEditBookModal] = useState(false);
+
+    const openShowEditBookModal = () => {
+        setIsShowEditBookModal(true);
+    }
 
     const handleSort = (field) => {
         const sortedBooks = [...books].sort((a, b) => {
@@ -103,7 +108,10 @@ const useBookTable = (setBooks, books) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort
+        handleSort,
+        isShowEditBookModal,
+        setIsShowEditBookModal,
+        openShowEditBookModal
     };
 }
 

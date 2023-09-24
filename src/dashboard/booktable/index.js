@@ -1,9 +1,11 @@
 import React from 'react';
 import {Table} from "react-bootstrap";
-import Banner from "../../../banner/Banner";
-import SearchArea from "./SearchArea";
-import useBookTable from "../actions/useBookTable";
-import PageFooter from "./PageFooter";
+import Banner from "../../banner/Banner";
+import SearchArea from "./components/SearchArea";
+import useBookTable from "./actions/useBookTable";
+import PageFooter from "./components/PageFooter";
+import EditBookModal from "./components/EditBookModal";
+import Button from "react-bootstrap/Button";
 
 const BookTable = ({setBooks, books}) => {
 
@@ -18,7 +20,10 @@ const BookTable = ({setBooks, books}) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort
+        handleSort,
+        isShowEditBookModal,
+        setIsShowEditBookModal,
+        openShowEditBookModal
     } = useBookTable(setBooks, books);
 
     return (
@@ -48,6 +53,9 @@ const BookTable = ({setBooks, books}) => {
                             Publisher {sortField === 'publisher' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
                         </div>
                     </th>
+                    <th className="col-3">
+                        Operations
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,11 +67,22 @@ const BookTable = ({setBooks, books}) => {
                             <td>{book.author}</td>
                             <td>{book.category}</td>
                             <td>{book.publisher}</td>
+                            <td>
+                                <Button
+                                    className="mx-1"
+                                    onClick={openShowEditBookModal}
+                                >
+                                    Edit
+                                </Button>
+                                <Button>Delete</Button>
+                            </td>
+
                         </tr>)
                 })}
                 </tbody>
             </Table>
             <PageFooter pageInfo={pageInfo} handlePageClick={handlePageClick}/>
+            <EditBookModal isOpen={isShowEditBookModal} setIsShowEditBookModal={setIsShowEditBookModal}/>
         </Banner>
 
     );
