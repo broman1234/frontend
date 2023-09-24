@@ -3,10 +3,10 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import useEditBookModal from "../actions/useEditBookModal";
+import useBookInfoModal from "../actions/useBookInfoModal";
 
-const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
-    const {closeEditBookModal} = useEditBookModal(isOpen, setIsShowEditBookModal);
+const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook}) => {
+    const {closeBookInfoModal, isEditEnabled} = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook);
 
     return (
         <div>
@@ -27,7 +27,7 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
                                 Title
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="title" placeholder="Title" />
+                                <Form.Control type="title" placeholder="Title" readOnly={!isEditEnabled} value={currentBook.title}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
@@ -35,7 +35,7 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
                                 Author
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="author" placeholder="Author" />
+                                <Form.Control type="author" placeholder="Author" readOnly={!isEditEnabled} value={currentBook.author}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextCategory">
@@ -43,7 +43,7 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
                                 Category
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="category" placeholder="Category" />
+                                <Form.Control type="category" placeholder="Category" readOnly={!isEditEnabled} value={currentBook.category}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPublisher">
@@ -51,7 +51,7 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
                                 Publisher
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="publisher" placeholder="Publisher" />
+                                <Form.Control type="publisher" placeholder="Publisher" readOnly={!isEditEnabled} value={currentBook.publisher}/>
                             </Col>
                         </Form.Group>
                         <Form.Text className="text-danger">edit book error message</Form.Text>
@@ -60,10 +60,12 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
                 <Modal.Footer>
                     <Button
                         variant="secondary"
-                        onClick={closeEditBookModal}
+                        onClick={closeBookInfoModal}
                     >
                         Close
                     </Button>
+                    <Button variant="danger">Cancel</Button>
+                    <Button>Edit</Button>
                     <Button
                         variant="primary"
                     >
@@ -75,4 +77,4 @@ const EditBookModal = ({isOpen, setIsShowEditBookModal}) => {
     );
 };
 
-export default EditBookModal;
+export default BookInfoModal;

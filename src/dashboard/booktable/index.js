@@ -4,7 +4,7 @@ import Banner from "../../banner/Banner";
 import SearchArea from "./components/SearchArea";
 import useBookTable from "./actions/useBookTable";
 import PageFooter from "./components/PageFooter";
-import EditBookModal from "./components/EditBookModal";
+import BookInfoModal from "./components/BookInfoModal";
 import Button from "react-bootstrap/Button";
 
 const BookTable = ({setBooks, books}) => {
@@ -21,9 +21,11 @@ const BookTable = ({setBooks, books}) => {
         sortField,
         sortOrder,
         handleSort,
-        isShowEditBookModal,
-        setIsShowEditBookModal,
-        openShowEditBookModal
+        isShowBookInfoModal,
+        setIsShowBookInfoModal,
+        openBookInfoModal,
+        currentBook,
+        setCurrentBook
     } = useBookTable(setBooks, books);
 
     return (
@@ -45,12 +47,14 @@ const BookTable = ({setBooks, books}) => {
                     </th>
                     <th onClick={() => handleSort('category')}>
                         <div className="d-flex justify-content-between">
-                            Category {sortField === 'category' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                            Category {sortField === 'category' && (sortOrder === 'asc' ? <span>▲</span> :
+                            <span>▼</span>)}
                         </div>
                     </th>
                     <th onClick={() => handleSort('publisher')}>
                         <div className="d-flex justify-content-between">
-                            Publisher {sortField === 'publisher' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                            Publisher {sortField === 'publisher' && (sortOrder === 'asc' ? <span>▲</span> :
+                            <span>▼</span>)}
                         </div>
                     </th>
                     <th className="col-3">
@@ -62,27 +66,31 @@ const BookTable = ({setBooks, books}) => {
                 {books.map((book) => {
                     let bookIndex = books.indexOf(book);
                     return (<tr key={bookIndex}>
-                            <td>{bookIndex + 1}</td>
-                            <td>{book.title}</td>
-                            <td>{book.author}</td>
-                            <td>{book.category}</td>
-                            <td>{book.publisher}</td>
-                            <td>
-                                <Button
-                                    className="mx-1"
-                                    onClick={openShowEditBookModal}
-                                >
-                                    Edit
-                                </Button>
-                                <Button>Delete</Button>
-                            </td>
+                        <td>{bookIndex + 1}</td>
+                        <td>{book.title}</td>
+                        <td>{book.author}</td>
+                        <td>{book.category}</td>
+                        <td>{book.publisher}</td>
+                        <td>
+                            <Button
+                                className="mx-1"
+                                onClick={() => openBookInfoModal(book)}
+                            >
+                                View
+                            </Button>
+                            <Button>Delete</Button>
+                        </td>
 
-                        </tr>)
+                    </tr>)
                 })}
                 </tbody>
             </Table>
             <PageFooter pageInfo={pageInfo} handlePageClick={handlePageClick}/>
-            <EditBookModal isOpen={isShowEditBookModal} setIsShowEditBookModal={setIsShowEditBookModal}/>
+            {isShowBookInfoModal && <BookInfoModal isOpen={isShowBookInfoModal}
+                           setIsShowBookInfoModal={setIsShowBookInfoModal}
+                           currentBook={currentBook}
+                           setCurrentBook={setCurrentBook}
+            />}
         </Banner>
 
     );
