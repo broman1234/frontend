@@ -4,11 +4,34 @@ import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefr
 const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
 
+    const [isEditEnabled, setIsEditEnabled] = useState(false);
+    const [editedBook, setEditedBook] = useState({
+        id: 0,
+        title: "",
+        author: "",
+        category: "",
+        publisher: ""
+    });
+
     const closeBookInfoModal = () => {
         setIsShowBookInfoModal(false);
     }
 
-    const [isEditEnabled, setIsEditEnabled] = useState(false);
+    const handleEdit = () => {
+        setIsEditEnabled(true);
+    }
+
+    const cancelEditing = () => {
+        setIsEditEnabled(false);
+        setEditedBook({
+            id: 0,
+            title: "",
+            author: "",
+            category: "",
+            publisher: ""
+        })
+    }
+
 
     useEffect(
         () => {
@@ -25,16 +48,22 @@ const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurren
                 } else {
                     return Promise.reject(response)
                 }
-            }).then(book => setCurrentBook(book))
+            }).then(book => {
+                setCurrentBook({...book});
+            })
                 .catch(
                     //Todo: deal with exception
                 )
-        }
+        }, [currentBook.id, setCurrentBook, user.jwt, validateAndRefreshJwt]
     )
 
     return {
         closeBookInfoModal,
-        isEditEnabled
+        isEditEnabled,
+        handleEdit,
+        editedBook,
+        setEditedBook,
+        cancelEditing
     }
 }
 

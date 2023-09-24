@@ -6,7 +6,14 @@ import Button from "react-bootstrap/Button";
 import useBookInfoModal from "../actions/useBookInfoModal";
 
 const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook}) => {
-    const {closeBookInfoModal, isEditEnabled} = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook);
+    const {
+        closeBookInfoModal,
+        isEditEnabled,
+        handleEdit,
+        editedBook,
+        setEditedBook,
+        cancelEditing
+    } = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook);
 
     return (
         <div>
@@ -27,7 +34,11 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                                 Title
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="title" placeholder="Title" readOnly={!isEditEnabled} value={currentBook.title}/>
+                                <Form.Control type="title" placeholder={currentBook.title} readOnly={!isEditEnabled}
+                                              value={editedBook.title}
+                                              onChange={event => setEditedBook({...editedBook, title: event.target.value})}
+
+                                />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
@@ -35,7 +46,11 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                                 Author
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="author" placeholder="Author" readOnly={!isEditEnabled} value={currentBook.author}/>
+                                <Form.Control type="author" placeholder={currentBook.author} readOnly={!isEditEnabled}
+                                              value={editedBook.author}
+                                              onChange={event => setEditedBook({...editedBook, author: event.target.value})}
+
+                                />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextCategory">
@@ -43,7 +58,10 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                                 Category
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="category" placeholder="Category" readOnly={!isEditEnabled} value={currentBook.category}/>
+                                <Form.Control type="category" placeholder={currentBook.category} readOnly={!isEditEnabled}
+                                              value={editedBook.category}
+                                              onChange={event => setEditedBook({...editedBook, category: event.target.value})}
+                                />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPublisher">
@@ -51,7 +69,10 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                                 Publisher
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="publisher" placeholder="Publisher" readOnly={!isEditEnabled} value={currentBook.publisher}/>
+                                <Form.Control type="publisher" placeholder={currentBook.publisher} readOnly={!isEditEnabled}
+                                              value={editedBook.publisher}
+                                              onChange={event => setEditedBook({...editedBook, publisher: event.target.value})}
+                                />
                             </Col>
                         </Form.Group>
                         <Form.Text className="text-danger">edit book error message</Form.Text>
@@ -64,13 +85,22 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                     >
                         Close
                     </Button>
-                    <Button variant="danger">Cancel</Button>
-                    <Button>Edit</Button>
+                    {isEditEnabled &&
+                        <Button variant="danger"
+                                onClick={cancelEditing}
+                        >
+                            Cancel
+                        </Button>}
                     <Button
-                        variant="primary"
+                        onClick={handleEdit}
                     >
-                        Submit
+                        Edit
                     </Button>
+                    {isEditEnabled &&
+                        <Button variant="primary"
+                        >
+                        Submit
+                    </Button>}
                 </Modal.Footer>
             </Modal>
         </div>
