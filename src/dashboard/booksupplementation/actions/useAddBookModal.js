@@ -38,8 +38,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSucc
                 return response.json();
             })
             .then(book => {
-                const updatedBooks = [...books, book];
-                setBooks(updatedBooks);
+                setBooks([...books, book]);
                 setIsShowAddBookSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just added a book successfully!");

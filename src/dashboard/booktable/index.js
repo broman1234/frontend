@@ -87,9 +87,10 @@ const BookTable = ({setBooks, books}) => {
             </Table>
             <PageFooter pageInfo={pageInfo} handlePageClick={handlePageClick}/>
             {isShowBookInfoModal && <BookInfoModal isOpen={isShowBookInfoModal}
-                           setIsShowBookInfoModal={setIsShowBookInfoModal}
-                           currentBook={currentBook}
-                           setCurrentBook={setCurrentBook}
+                                                   setIsShowBookInfoModal={setIsShowBookInfoModal}
+                                                   currentBook={currentBook}
+                                                   setCurrentBook={setCurrentBook}
+                                                   books={books} setBooks={setBooks}
             />}
         </Banner>
 

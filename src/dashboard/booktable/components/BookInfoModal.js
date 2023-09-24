@@ -5,15 +5,16 @@ import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useBookInfoModal from "../actions/useBookInfoModal";
 
-const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook}) => {
+const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook, books, setBooks}) => {
     const {
         closeBookInfoModal,
         isEditEnabled,
         handleEdit,
         editedBook,
         setEditedBook,
-        cancelEditing
-    } = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook);
+        cancelEditing,
+        handleSubmit
+    } = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook, books, setBooks);
 
     return (
         <div>
@@ -98,6 +99,7 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
                     </Button>
                     {isEditEnabled &&
                         <Button variant="primary"
+                                onClick={handleSubmit}
                         >
                         Submit
                     </Button>}

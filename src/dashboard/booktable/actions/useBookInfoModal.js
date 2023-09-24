@@ -1,21 +1,43 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 
-const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook) => {
+const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook, books, setBooks) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
 
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [editedBook, setEditedBook] = useState({
-        id: 0,
         title: "",
         author: "",
         category: "",
         publisher: ""
     });
 
-    const closeBookInfoModal = () => {
+    const closeBookInfoModal = useCallback(() => {
         setIsShowBookInfoModal(false);
-    }
+    }, [setIsShowBookInfoModal])
+
+    const handleSubmit = useCallback(() => {
+        fetch(`api/admin/books/${currentBook.id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.jwt
+            },
+            method: "put",
+            body: JSON.stringify({...editedBook, id: currentBook.id})
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                return Promise.reject(response);
+            }
+        }).then(updatedBook => {
+            const updatedBooks = books.map(book => (book.id === updatedBook.id ? updatedBook : book));
+            setBooks(updatedBooks);
+            closeBookInfoModal();
+        }).catch(
+            // TODO: deal with exception
+        )
+    }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks, user.jwt])
 
     const handleEdit = () => {
         setIsEditEnabled(true);
@@ -54,7 +76,7 @@ const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurren
                 .catch(
                     //Todo: deal with exception
                 )
-        }, [currentBook.id, setCurrentBook, user.jwt, validateAndRefreshJwt]
+        }, [currentBook.id, setCurrentBook, user.jwt]
     )
 
     return {
@@ -63,7 +85,8 @@ const useBookInfoModal = (isOpen, setIsShowBookInfoModal, currentBook, setCurren
         handleEdit,
         editedBook,
         setEditedBook,
-        cancelEditing
+        cancelEditing,
+        handleSubmit
     }
 }
 
