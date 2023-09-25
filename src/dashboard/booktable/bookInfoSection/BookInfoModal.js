@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useBookInfoModal from "../actions/useBookInfoModal";
+import SubmitConfirmationPopup from "./SubmitConfirmationPopup";
 
 const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, setBooks}) => {
     const {
@@ -13,11 +14,14 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
         editedBook,
         setEditedBook,
         cancelEditing,
-        handleSubmit
+        handleSubmit,
+        isShowSubmitConfirmationPopup,
+        openSubmitConfirmationPopup,
+        closeSubmitConfirmationPopup
     } = useBookInfoModal(setIsOpen, currentBook, setCurrentBook, books, setBooks);
 
     return (
-        <div>
+        <>
             <Modal
                 show={isOpen}
                 size="lg"
@@ -37,7 +41,10 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                             <Col sm="10">
                                 <Form.Control type="title" placeholder={currentBook.title} readOnly={!isEditEnabled}
                                               value={editedBook.title}
-                                              onChange={event => setEditedBook({...editedBook, title: event.target.value})}
+                                              onChange={event => setEditedBook({
+                                                  ...editedBook,
+                                                  title: event.target.value
+                                              })}
 
                                 />
                             </Col>
@@ -49,7 +56,10 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                             <Col sm="10">
                                 <Form.Control type="author" placeholder={currentBook.author} readOnly={!isEditEnabled}
                                               value={editedBook.author}
-                                              onChange={event => setEditedBook({...editedBook, author: event.target.value})}
+                                              onChange={event => setEditedBook({
+                                                  ...editedBook,
+                                                  author: event.target.value
+                                              })}
 
                                 />
                             </Col>
@@ -59,9 +69,13 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                                 Category
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="category" placeholder={currentBook.category} readOnly={!isEditEnabled}
+                                <Form.Control type="category" placeholder={currentBook.category}
+                                              readOnly={!isEditEnabled}
                                               value={editedBook.category}
-                                              onChange={event => setEditedBook({...editedBook, category: event.target.value})}
+                                              onChange={event => setEditedBook({
+                                                  ...editedBook,
+                                                  category: event.target.value
+                                              })}
                                 />
                             </Col>
                         </Form.Group>
@@ -70,9 +84,13 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                                 Publisher
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="publisher" placeholder={currentBook.publisher} readOnly={!isEditEnabled}
+                                <Form.Control type="publisher" placeholder={currentBook.publisher}
+                                              readOnly={!isEditEnabled}
                                               value={editedBook.publisher}
-                                              onChange={event => setEditedBook({...editedBook, publisher: event.target.value})}
+                                              onChange={event => setEditedBook({
+                                                  ...editedBook,
+                                                  publisher: event.target.value
+                                              })}
                                 />
                             </Col>
                         </Form.Group>
@@ -99,13 +117,15 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                     </Button>
                     {isEditEnabled &&
                         <Button variant="primary"
-                                onClick={handleSubmit}
+                                onClick={openSubmitConfirmationPopup}
                         >
-                        Submit
-                    </Button>}
+                            Submit
+                        </Button>}
+                    <SubmitConfirmationPopup isOpen={isShowSubmitConfirmationPopup} handleSubmit={handleSubmit}
+                                             closePopup={closeSubmitConfirmationPopup}/>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 };
 

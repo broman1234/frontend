@@ -1,5 +1,5 @@
 import React from 'react';
-import BookInfoModal from "../components/BookInfoModal";
+import BookInfoModal from "./BookInfoModal";
 import Button from "react-bootstrap/Button";
 import useBookInfoSection from "./useBookInfoSection";
 
@@ -21,12 +21,16 @@ const BookInfoSection = ({book, books, setBooks}) => {
             >
                 View
             </Button>
-            {isShowBookInfoModal && <BookInfoModal isOpen={isShowBookInfoModal}
-                                                   setIsOpen={setIsShowBookInfoModal}
-                                                   currentBook={currentBook}
-                                                   setCurrentBook={setCurrentBook}
-                                                   books={books} setBooks={setBooks}
-            />}
+            {isShowBookInfoModal && (
+                <BookInfoModal
+                    isOpen={isShowBookInfoModal}
+                    setIsOpen={setIsShowBookInfoModal}
+                    currentBook={currentBook}
+                    setCurrentBook={setCurrentBook}
+                    books={books}
+                    setBooks={setBooks}
+                />
+            )}
         </>
     );
 };

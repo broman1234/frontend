@@ -2,7 +2,8 @@ import {useCallback, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 
 const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBooks) => {
-    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
+    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
+    const [isShowSubmitConfirmationPopup, setIsShowSubmitConfirmationPopup] = useState(false);
 
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [editedBook, setEditedBook] = useState({
@@ -15,6 +16,14 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
     const closeBookInfoModal = useCallback(() => {
         setIsOpen(false);
     }, [setIsOpen])
+
+    const openSubmitConfirmationPopup = useCallback(() => {
+        setIsShowSubmitConfirmationPopup(true);
+    }, [setIsShowSubmitConfirmationPopup]);
+
+    const closeSubmitConfirmationPopup = useCallback(() => {
+        setIsShowSubmitConfirmationPopup(false);
+    }, [setIsShowSubmitConfirmationPopup])
 
     const handleSubmit = useCallback(() => {
         fetch(`api/admin/books/${currentBook.id}`, {
@@ -86,7 +95,10 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         editedBook,
         setEditedBook,
         cancelEditing,
-        handleSubmit
+        handleSubmit,
+        isShowSubmitConfirmationPopup,
+        openSubmitConfirmationPopup,
+        closeSubmitConfirmationPopup
     }
 }
 
