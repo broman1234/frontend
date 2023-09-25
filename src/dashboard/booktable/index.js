@@ -4,8 +4,8 @@ import Banner from "../../banner/Banner";
 import SearchArea from "./components/SearchArea";
 import useBookTable from "./actions/useBookTable";
 import PageFooter from "./components/PageFooter";
-import BookInfoModal from "./components/BookInfoModal";
 import Button from "react-bootstrap/Button";
+import BookInfoSection from "./bookInfoSection/BookInfoSection";
 
 const BookTable = ({setBooks, books}) => {
 
@@ -20,12 +20,7 @@ const BookTable = ({setBooks, books}) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort,
-        isShowBookInfoModal,
-        setIsShowBookInfoModal,
-        openBookInfoModal,
-        currentBook,
-        setCurrentBook
+        handleSort
     } = useBookTable(setBooks, books);
 
     return (
@@ -72,12 +67,7 @@ const BookTable = ({setBooks, books}) => {
                         <td>{book.category}</td>
                         <td>{book.publisher}</td>
                         <td>
-                            <Button
-                                className="mx-1"
-                                onClick={() => openBookInfoModal(book)}
-                            >
-                                View
-                            </Button>
+                            <BookInfoSection book={book} books={books} setBooks={setBooks} />
                             <Button>Delete</Button>
                         </td>
 
@@ -86,12 +76,6 @@ const BookTable = ({setBooks, books}) => {
                 </tbody>
             </Table>
             <PageFooter pageInfo={pageInfo} handlePageClick={handlePageClick}/>
-            {isShowBookInfoModal && <BookInfoModal isOpen={isShowBookInfoModal}
-                                                   setIsShowBookInfoModal={setIsShowBookInfoModal}
-                                                   currentBook={currentBook}
-                                                   setCurrentBook={setCurrentBook}
-                                                   books={books} setBooks={setBooks}
-            />}
         </Banner>
 
     );

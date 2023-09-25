@@ -5,7 +5,7 @@ import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useBookInfoModal from "../actions/useBookInfoModal";
 
-const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook, books, setBooks}) => {
+const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, setBooks}) => {
     const {
         closeBookInfoModal,
         isEditEnabled,
@@ -14,7 +14,7 @@ const BookInfoModal = ({isOpen, setIsShowBookInfoModal, currentBook, setCurrentB
         setEditedBook,
         cancelEditing,
         handleSubmit
-    } = useBookInfoModal(isOpen, setIsShowBookInfoModal, currentBook, setCurrentBook, books, setBooks);
+    } = useBookInfoModal(setIsOpen, currentBook, setCurrentBook, books, setBooks);
 
     return (
         <div>

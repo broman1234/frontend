@@ -22,19 +22,6 @@ const useBookTable = (setBooks, books) => {
     })
     const [sortField, setSortField] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
-    const [isShowBookInfoModal, setIsShowBookInfoModal] = useState(false);
-    const [currentBook, setCurrentBook] = useState({
-        id: 0,
-        title: "",
-        author: "",
-        category: "",
-        publisher: ""
-    });
-
-    const openBookInfoModal = (currentBook) => {
-        setIsShowBookInfoModal(true);
-        setCurrentBook(currentBook);
-    }
 
     const handleSort = (field) => {
         const sortedBooks = [...books].sort((a, b) => {
@@ -116,12 +103,7 @@ const useBookTable = (setBooks, books) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort,
-        isShowBookInfoModal,
-        setIsShowBookInfoModal,
-        openBookInfoModal,
-        currentBook,
-        setCurrentBook
+        handleSort
     };
 }
 
