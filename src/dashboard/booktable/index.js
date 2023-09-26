@@ -52,6 +52,12 @@ const BookTable = ({setBooks, books}) => {
                             <span>▼</span>)}
                         </div>
                     </th>
+                    <th onClick={() => handleSort('description')}>
+                        <div className="d-flex justify-content-between">
+                            Description {sortField === 'description' && (sortOrder === 'asc' ? <span>▲</span> :
+                            <span>▼</span>)}
+                        </div>
+                    </th>
                     <th className="col-3">
                         Operations
                     </th>
@@ -66,6 +72,7 @@ const BookTable = ({setBooks, books}) => {
                         <td>{book.author}</td>
                         <td>{book.category}</td>
                         <td>{book.publisher}</td>
+                        <td>{book.description}</td>
                         <td>
                             <BookInfoSection book={book} books={books} setBooks={setBooks} />
                             <Button>Delete</Button>

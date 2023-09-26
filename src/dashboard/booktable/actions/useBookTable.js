@@ -25,7 +25,11 @@ const useBookTable = (setBooks, books) => {
 
     const handleSort = (field) => {
         const sortedBooks = [...books].sort((a, b) => {
-            if (a[field] < b[field]) return  -1;
+            if (a[field] == null && b[field] == null) return 0;
+            if (a[field] == null) return 1;
+            if (b[field] == null) return -1;
+
+            if (a[field] < b[field]) return -1;
             if (a[field] > b[field]) return 1;
             return 0;
         });
