@@ -8,7 +8,8 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSucc
         title: "",
         author: "",
         category: "",
-        publisher: ""
+        publisher: "",
+        description: ""
     })
     const [addBookErrorMessage, setAddBookErrorMessage] = useState("");
     const {setBannerStyle, setBannerMessage} = useContext(BannerContext);
@@ -20,7 +21,8 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSucc
             "title": bookInfo.title,
             "author": bookInfo.author,
             "category": bookInfo.category,
-            "publisher": bookInfo.publisher
+            "publisher": bookInfo.publisher,
+            "description": bookInfo.description
         };
 
         fetch("api/admin/books", {

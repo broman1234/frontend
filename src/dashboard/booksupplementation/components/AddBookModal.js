@@ -75,6 +75,18 @@ const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books, setIsShowAddBo
                                               })}/>
                             </Col>
                         </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+                            <Form.Label column sm="2">
+                                Description
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="description" placeholder="Description" value={bookInfo.description}
+                                              onChange={event => setBookInfo({
+                                                  ...bookInfo,
+                                                  description: event.target.value
+                                              })}/>
+                            </Col>
+                        </Form.Group>
                         <Form.Text className="text-danger">{addBookErrorMessage}</Form.Text>
                     </Form>
                 </Modal.Body>
