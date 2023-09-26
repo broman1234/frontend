@@ -94,6 +94,21 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                                 />
                             </Col>
                         </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+                            <Form.Label column sm="2">
+                                Description
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="title" placeholder={currentBook.description} readOnly={!isEditEnabled}
+                                              value={editedBook.description}
+                                              onChange={event => setEditedBook({
+                                                  ...editedBook,
+                                                  description: event.target.value
+                                              })}
+
+                                />
+                            </Col>
+                        </Form.Group>
                         <Form.Text className="text-danger">edit book error message</Form.Text>
                     </Form>
                 </Modal.Body>

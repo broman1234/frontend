@@ -8,7 +8,8 @@ const useBookInfoSection = () => {
         title: "",
         author: "",
         category: "",
-        publisher: ""
+        publisher: "",
+        description: ""
     });
 
     const openBookInfoModal = (currentBook) => {

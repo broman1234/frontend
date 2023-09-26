@@ -10,7 +10,8 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         title: "",
         author: "",
         category: "",
-        publisher: ""
+        publisher: "",
+        description: ""
     });
 
     const closeBookInfoModal = useCallback(() => {
@@ -59,7 +60,8 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
             title: "",
             author: "",
             category: "",
-            publisher: ""
+            publisher: "",
+            description: ""
         })
     }
 
