@@ -1,11 +1,12 @@
 import React from 'react';
 import {Table} from "react-bootstrap";
 import Banner from "../../banner/Banner";
-import SearchArea from "./components/SearchArea";
+import SearchArea from "./searchSection/SearchArea";
 import useBookTable from "./actions/useBookTable";
-import PageFooter from "./components/PageFooter";
+import PageFooter from "./pageFooterSection/PageFooter";
 import Button from "react-bootstrap/Button";
 import BookInfoSection from "./bookInfoSection/BookInfoSection";
+import BookDeleteSection from "./bookDeleteSection/BookDeleteSection";
 
 const BookTable = ({setBooks, books}) => {
 
@@ -58,8 +59,16 @@ const BookTable = ({setBooks, books}) => {
                             <span>▼</span>)}
                         </div>
                     </th>
-                    <th className="col-2">
-                        Operations
+                    <th className="col-2" >
+                        <span className="d-flex align-items-center justify-content-between">
+                            Operations
+                            <span className="d-flex justify-content-end">
+                                <Button size="sm" variant="danger">Delete</Button>
+                                <Button size="sm">Cancel</Button>
+                            </span>
+                        </span>
+
+
                     </th>
                 </tr>
                 </thead>
@@ -79,9 +88,9 @@ const BookTable = ({setBooks, books}) => {
                                 </span>
                             </span>
                         </td>
-                        <td>
-                            <BookInfoSection book={book} books={books} setBooks={setBooks} />
-                            <Button>Delete</Button>
+                        <td className="d-flex justify-content-around">
+                            <BookInfoSection book={book} books={books} setBooks={setBooks}/>
+                            <BookDeleteSection/>
                         </td>
 
                     </tr>)

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import useBookInfoModal from "../actions/useBookInfoModal";
+import useBookInfoModal from "./useBookInfoModal";
 import SubmitConfirmationPopup from "./SubmitConfirmationPopup";
 
 const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, setBooks}) => {
