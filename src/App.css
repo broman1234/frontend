@@ -42,6 +42,26 @@
   background-color: cadetblue;
 }
 
+.overflow {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: left;
+  width: 200px
+}
+
+.overflow:hover {
+  overflow: visible;
+}
+
+.overflow:hover span{
+  position: relative;
+  background-color: white;
+
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 1px;
+}
 
 @keyframes App-logo-spin {
   from {
