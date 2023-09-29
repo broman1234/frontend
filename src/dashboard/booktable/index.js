@@ -14,6 +14,7 @@ const BookTable = ({setBooks, books}) => {
         bannerMessage,
         bannerStyle,
         isShowBookTableErrorBanner,
+        isShowBookTableSuccessBanner,
         bookRequest,
         setBookRequest,
         pageInfo,
@@ -21,11 +22,14 @@ const BookTable = ({setBooks, books}) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort
+        handleSort,
+        deletedBookIds,
+        setDeletedBookIds,
+        submitDeleteBooks
     } = useBookTable(setBooks, books);
 
     return (
-        <Banner isShowBanner={isShowBookTableErrorBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}>
+        <Banner isShowErrorBanner={isShowBookTableErrorBanner} isShowSuccessBanner={isShowBookTableSuccessBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}>
             <SearchArea bookRequest={bookRequest} setBookRequest={setBookRequest} fetchBooks={fetchBooks}/>
             <Table striped bordered hover className="mt-3">
                 <thead>
@@ -62,13 +66,11 @@ const BookTable = ({setBooks, books}) => {
                     <th className="col-2" >
                         <span className="d-flex align-items-center justify-content-between">
                             Operations
-                            <span className="d-flex justify-content-end">
-                                <Button size="sm" variant="danger">Delete</Button>
-                                <Button size="sm">Cancel</Button>
-                            </span>
+                            {deletedBookIds.length > 0 && <span className="d-flex justify-content-end">
+                                <Button className="mx-1" size="sm" variant="danger" onClick={() => submitDeleteBooks(deletedBookIds)}>Delete</Button>
+                                <Button size="sm" onClick={() => setDeletedBookIds([])}>Cancel</Button>
+                            </span>}
                         </span>
-
-
                     </th>
                 </tr>
                 </thead>
@@ -90,7 +92,7 @@ const BookTable = ({setBooks, books}) => {
                         </td>
                         <td className="d-flex justify-content-around">
                             <BookInfoSection book={book} books={books} setBooks={setBooks}/>
-                            <BookDeleteSection/>
+                            <BookDeleteSection bookId={book.id} deletedBookIds={deletedBookIds} setDeletedBookIds={setDeletedBookIds}/>
                         </td>
 
                     </tr>)

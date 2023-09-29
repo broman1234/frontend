@@ -6,6 +6,7 @@ const useBookTable = (setBooks, books) => {
     const user = useUser();
     const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle} = useContext(BannerContext);
     const [isShowBookTableErrorBanner, setIsShowBookTableErrorBanner] = useState(false);
+    const [isShowBookTableSuccessBanner, setIsShowBookTableSuccessBanner] = useState(false);
     const [bookRequest, setBookRequest] = useState({
         title: "",
         author: "",
@@ -22,6 +23,28 @@ const useBookTable = (setBooks, books) => {
     })
     const [sortField, setSortField] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
+    const [deletedBookIds, setDeletedBookIds] = useState([]);
+
+    const submitDeleteBooks = (deletedBookIds) => {
+        fetch(`api/admin/books/${deletedBookIds.join(',')}`, {
+            headers: {
+                "Authorization": "Bearer " + user.jwt
+            },
+            method: "delete",
+        }).then(response => {
+            if (response.status === 200) {
+                setBooks(prevBooks => prevBooks.filter(book => !deletedBookIds.includes(book.id)));
+                setIsShowBookTableSuccessBanner(true);
+                setBannerStyle("success");
+                setBannerMessage("You've just deleted the books successfully!");
+                setDeletedBookIds([])
+                setTimeout(() => {
+                    setIsShowBookTableSuccessBanner(false);
+                }, 5000);
+            }
+        })
+
+    }
 
     const handleSort = (field) => {
         const sortedBooks = [...books].sort((a, b) => {
@@ -68,7 +91,6 @@ const useBookTable = (setBooks, books) => {
             method: "get"
         })
             .then((response) => {
-                    console.log("response: ========", response);
                     return response.json()
                 }
             )
@@ -98,7 +120,7 @@ const useBookTable = (setBooks, books) => {
         bannerMessage,
         bannerStyle,
         isShowBookTableErrorBanner,
-        setIsShowBookTableErrorBanner,
+        isShowBookTableSuccessBanner,
         bookRequest,
         setBookRequest,
         pageInfo,
@@ -107,7 +129,10 @@ const useBookTable = (setBooks, books) => {
         fetchBooks,
         sortField,
         sortOrder,
-        handleSort
+        handleSort,
+        deletedBookIds,
+        setDeletedBookIds,
+        submitDeleteBooks
     };
 }
 

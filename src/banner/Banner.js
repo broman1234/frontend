@@ -1,17 +1,35 @@
 import React from 'react';
 import {Alert, Col, Row} from "react-bootstrap";
 
-const Banner = ({isShowBanner, bannerStyle, bannerMessage, children}) => {
+const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMessage, children}) => {
 
     return (
-        isShowBanner ?
-        <Row className="mt-3">
-            <Col>
-                <Alert key={bannerStyle} variant={bannerStyle} show={isShowBanner}>
-                    {bannerMessage}
-                </Alert>
-            </Col>
-        </Row> : children
+        <>
+            {isShowErrorBanner && (
+                <Row className="mt-3">
+                    <Col>
+                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowErrorBanner}>
+                            {bannerMessage}
+                        </Alert>
+                    </Col>
+                </Row>
+            )}
+
+            {!isShowErrorBanner && (
+                <>
+                    {isShowSuccessBanner && (
+                        <Row className="mt-3">
+                            <Col>
+                                <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}>
+                                    {bannerMessage}
+                                </Alert>
+                            </Col>
+                        </Row>
+                    )}
+                    {children}
+                </>
+            )}
+        </>
     );
 };
 
