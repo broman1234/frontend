@@ -18,7 +18,7 @@ const BookSupplementation = ({setBooks, books}) => {
 
     return (
         <div>
-            <Banner isShowBanner={isShowAddBookSuccessBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}/>
+            <Banner isShowSuccessBanner={isShowAddBookSuccessBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}/>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Button
