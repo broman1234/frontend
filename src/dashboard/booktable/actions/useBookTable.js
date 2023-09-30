@@ -4,9 +4,11 @@ import {BannerContext} from "../../../banner/BannerProvider";
 
 const useBookTable = (setBooks, books) => {
     const user = useUser();
-    const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle} = useContext(BannerContext);
-    const [isShowBookTableErrorBanner, setIsShowBookTableErrorBanner] = useState(false);
-    const [isShowBookTableSuccessBanner, setIsShowBookTableSuccessBanner] = useState(false);
+    const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle,
+        isShowBookTableErrorBanner,
+        setIsShowBookTableErrorBanner,
+        isShowBookTableSuccessBanner,
+        setIsShowBookTableSuccessBanner} = useContext(BannerContext);
     const [bookRequest, setBookRequest] = useState({
         title: "",
         author: "",

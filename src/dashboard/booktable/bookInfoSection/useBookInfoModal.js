@@ -1,10 +1,10 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
+import {BannerContext} from "../../../banner/BannerProvider";
 
 const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBooks) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
     const [isShowSubmitConfirmationPopup, setIsShowSubmitConfirmationPopup] = useState(false);
-
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [editedBook, setEditedBook] = useState({
         title: "",
@@ -13,6 +13,13 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         publisher: "",
         description: ""
     });
+    const {
+        setBannerStyle,
+        setBannerMessage,
+        setIsShowBookTableErrorBanner,
+        setIsShowBookTableSuccessBanner
+    } = useContext(BannerContext);
+    const [fetchBookInfoErrorMessage, setFetchBookInfoErrorMessage] = useState("");
 
     const closeBookInfoModal = useCallback(() => {
         setIsOpen(false);
@@ -43,9 +50,22 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         }).then(updatedBook => {
             const updatedBooks = books.map(book => (book.id === updatedBook.id ? updatedBook : book));
             setBooks(updatedBooks);
-            closeBookInfoModal();
-        }).catch(
-            // TODO: deal with exception
+            setIsShowBookTableSuccessBanner(true);
+            setBannerMessage("You've updated the book info successfully!");
+            setBannerStyle('success');
+            setTimeout(() => {
+                setIsShowBookTableSuccessBanner(false);
+            }, 5000);
+        }).catch(() => {
+            setIsShowBookTableErrorBanner(true);
+            setBannerMessage("Edit book info failed, please try again later");
+            setBannerStyle('danger');
+            setTimeout(() => {
+                setIsShowBookTableErrorBanner(false);
+            }, 5000);
+        }).finally(() => {
+                closeBookInfoModal();
+            }
         )
     }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks, user.jwt])
 
@@ -84,8 +104,17 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
             }).then(book => {
                 setCurrentBook({...book});
             })
-                .catch(
-                    //Todo: deal with exception
+                .catch(() => {
+                        setCurrentBook({
+                            ...currentBook,
+                            title: "",
+                            author: "",
+                            category: "",
+                            publisher: "",
+                            description: ""
+                        });
+                        setFetchBookInfoErrorMessage("Unable to fetch book information, please try again later");
+                    }
                 )
         }, [currentBook.id, setCurrentBook, user.jwt]
     )
@@ -100,7 +129,8 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         handleSubmit,
         isShowSubmitConfirmationPopup,
         openSubmitConfirmationPopup,
-        closeSubmitConfirmationPopup
+        closeSubmitConfirmationPopup,
+        fetchBookInfoErrorMessage
     }
 }
 

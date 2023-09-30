@@ -17,7 +17,8 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
         handleSubmit,
         isShowSubmitConfirmationPopup,
         openSubmitConfirmationPopup,
-        closeSubmitConfirmationPopup
+        closeSubmitConfirmationPopup,
+        fetchBookInfoErrorMessage
     } = useBookInfoModal(setIsOpen, currentBook, setCurrentBook, books, setBooks);
 
     return (
@@ -109,7 +110,7 @@ const BookInfoModal = ({isOpen, setIsOpen, currentBook, setCurrentBook, books, s
                                 />
                             </Col>
                         </Form.Group>
-                        <Form.Text className="text-danger">edit book error message</Form.Text>
+                        <Form.Text className="text-danger">{fetchBookInfoErrorMessage}</Form.Text>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

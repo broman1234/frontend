@@ -15,20 +15,16 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
                 </Row>
             )}
 
-            {!isShowErrorBanner && (
-                <>
-                    {isShowSuccessBanner && (
-                        <Row className="mt-3">
-                            <Col>
-                                <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}>
-                                    {bannerMessage}
-                                </Alert>
-                            </Col>
-                        </Row>
-                    )}
-                    {children}
-                </>
+            {isShowSuccessBanner && (
+                <Row className="mt-3">
+                    <Col>
+                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}>
+                            {bannerMessage}
+                        </Alert>
+                    </Col>
+                </Row>
             )}
+            {children}
         </>
     );
 };
