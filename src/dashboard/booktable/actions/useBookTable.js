@@ -113,7 +113,7 @@ const useBookTable = (setBooks, books) => {
             })
     }
 
-    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt, books.length]);
+    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt]);
 
     return {
         user,

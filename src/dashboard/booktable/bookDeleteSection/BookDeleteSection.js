@@ -13,6 +13,7 @@ const BookDeleteSection = ({bookId, deletedBookIds, setDeletedBookIds}) => {
                 label='delete'
                 onClick={() => handleRadioClick(bookId)}
                 checked={deletedBookIds.includes(bookId)}
+                onChange={() => {}}
             />
         </>
     );
