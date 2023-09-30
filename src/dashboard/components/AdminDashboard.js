@@ -14,14 +14,14 @@ const AdminDashboard = () => {
                 <Row>
                     <Col className="d-flex justify-content-end">
                         <Button
-                            className="btn btn-secondary"
+                            className="btn btn-secondary mb-1"
                             onClick={logOut}
+                            size="sm"
                         >
                             Logout
                         </Button>
                     </Col>
                 </Row>
-                <BookSupplementation setBooks={setBooks} books={books}/>
                 <BookTable setBooks={setBooks} books={books}/>
             </Container>
         </>

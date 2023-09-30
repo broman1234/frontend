@@ -48,7 +48,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                             />
                         </Form.Group>
                     </Col>
-                    <Col className="d-flex align-items-center justify-content-center">
+                    <Col className="d-flex align-items-center justify-content-center col-1">
                         <Button onClick={fetchBooks}>Search</Button>
                     </Col>
                 </Row>

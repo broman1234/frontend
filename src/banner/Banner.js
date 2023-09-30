@@ -6,7 +6,7 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
     return (
         <>
             {isShowErrorBanner && (
-                <Row className="mt-3">
+                <Row>
                     <Col>
                         <Alert key={bannerStyle} variant={bannerStyle} show={isShowErrorBanner}>
                             {bannerMessage}
@@ -16,7 +16,7 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
             )}
 
             {isShowSuccessBanner && (
-                <Row className="mt-3">
+                <Row>
                     <Col>
                         <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}>
                             {bannerMessage}

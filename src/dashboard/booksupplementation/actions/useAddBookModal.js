@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 import {BannerContext} from "../../../banner/BannerProvider";
 
-const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSuccessBanner) => {
+const useAddBookModal = (hideAddBookModal, setBooks, books) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -12,7 +12,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSucc
         description: ""
     })
     const [addBookErrorMessage, setAddBookErrorMessage] = useState("");
-    const {setBannerStyle, setBannerMessage} = useContext(BannerContext);
+    const {setBannerStyle, setBannerMessage, setIsShowBookTableSuccessBanner} = useContext(BannerContext);
 
     useEffect(validateAndRefreshJwt, [validateAndRefreshJwt])
 
@@ -41,11 +41,11 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, setIsShowAddBookSucc
             })
             .then(book => {
                 setBooks([...books, book]);
-                setIsShowAddBookSuccessBanner(true);
+                setIsShowBookTableSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just added a book successfully!");
                 setTimeout(() => {
-                    setIsShowAddBookSuccessBanner(false);
+                    setIsShowBookTableSuccessBanner(false);
                 }, 5000);
                 setAddBookErrorMessage("");
                 hideAddBookModal()

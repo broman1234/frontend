@@ -1,10 +1,7 @@
-import {useContext, useState} from "react";
-import {BannerContext} from "../../../banner/BannerProvider";
+import {useState} from "react";
 
 const useBookSupplementation = () => {
     const [isAddBookModalOpen, setIsAddBookModalOpen] = useState(false)
-    const {bannerStyle, bannerMessage} = useContext(BannerContext);
-    const [isShowAddBookSuccessBanner, setIsShowAddBookSuccessBanner] = useState(false);
 
     const showAddBookModal = () => {
         setIsAddBookModalOpen(true)
@@ -16,11 +13,7 @@ const useBookSupplementation = () => {
     return {
         showAddBookModal,
         isAddBookModalOpen,
-        hideAddBookModal,
-        isShowAddBookSuccessBanner,
-        setIsShowAddBookSuccessBanner,
-        bannerStyle,
-        bannerMessage
+        hideAddBookModal
     }
 }
 

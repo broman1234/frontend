@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import useBookSupplementation from "../actions/useBookSupplementation";
 import AddBookModal from "./AddBookModal";
-import Banner from "../../../banner/Banner";
 
 const BookSupplementation = ({setBooks, books}) => {
 
@@ -10,20 +9,16 @@ const BookSupplementation = ({setBooks, books}) => {
         showAddBookModal,
         isAddBookModalOpen,
         hideAddBookModal,
-        isShowAddBookSuccessBanner,
-        setIsShowAddBookSuccessBanner,
-        bannerStyle,
-        bannerMessage
     } = useBookSupplementation();
 
     return (
         <div>
-            <Banner isShowSuccessBanner={isShowAddBookSuccessBanner} bannerStyle={bannerStyle} bannerMessage={bannerMessage}/>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Button
                         className="btn btn-primary"
                         onClick={showAddBookModal}
+                        size="sm"
                     >
                         Add Book
                     </Button>
@@ -34,7 +29,6 @@ const BookSupplementation = ({setBooks, books}) => {
                 hideAddBookModal={hideAddBookModal}
                 setBooks={setBooks}
                 books={books}
-                setIsShowAddBookSuccessBanner={setIsShowAddBookSuccessBanner}
             />
         </div>
     );
