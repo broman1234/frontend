@@ -1,13 +1,13 @@
 import React from 'react';
 import {Table} from "react-bootstrap";
 import Banner from "../../banner/Banner";
-import SearchArea from "./searchSection/SearchArea";
+import SearchArea from "./bookSearchSection/SearchArea";
 import useBookTable from "./actions/useBookTable";
 import PageFooter from "./pageFooterSection/PageFooter";
 import Button from "react-bootstrap/Button";
 import BookInfoSection from "./bookInfoSection/BookInfoSection";
 import BookDeleteSection from "./bookDeleteSection/BookDeleteSection";
-import BookSupplementation from "../booksupplementation/components/BookSupplementation";
+import BookSupplementation from "./bookSupplementationSection/components/BookSupplementation";
 
 const BookTable = ({setBooks, books}) => {
 

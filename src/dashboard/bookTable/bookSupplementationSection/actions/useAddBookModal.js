@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
-import {BannerContext} from "../../../banner/BannerProvider";
+import useValidateAndRefreshJwt from "../../../../authentication/useValidateAndRefreshJwt";
+import {BannerContext} from "../../../../banner/BannerProvider";
 
 const useAddBookModal = (hideAddBookModal, setBooks, books) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
