@@ -1,9 +1,9 @@
-import useUser from "../../../authentication/useUser";
 import {useContext, useEffect, useState} from "react";
 import {BannerContext} from "../../../banner/BannerProvider";
+import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 
 const useBookTable = (setBooks, books) => {
-    const user = useUser();
+    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
     const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle,
         isShowBookTableErrorBanner,
         setIsShowBookTableErrorBanner,
@@ -28,6 +28,7 @@ const useBookTable = (setBooks, books) => {
     const [deletedBookIds, setDeletedBookIds] = useState([]);
 
     const submitDeleteBooks = (deletedBookIds) => {
+        validateAndRefreshJwt();
         fetch(`api/admin/books/${deletedBookIds.join(',')}`, {
             headers: {
                 "Authorization": "Bearer " + user.jwt
