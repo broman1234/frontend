@@ -70,12 +70,7 @@
 
 .banner-children {
   position: absolute;
-  top: 60px; /* 控制内容与 banner 顶部的距离 */
-}
-
-.custom-alert {
-  margin-bottom: 0;
-
+  top: 45px; /* 控制内容与 banner 顶部的距离 */
 }
 
 @keyframes App-logo-spin {

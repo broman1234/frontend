@@ -7,10 +7,10 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
     return (
         <>
             <Container fluid={true} className="search-area">
-                <Row className="mt-3">
+                <Row>
                     <Col>
                         <Form.Group controlId="title" >
-                            <Form.Label className="d-flex justify-content-center">Title</Form.Label>
+                            <Form.Label className="d-flex justify-content-center"><strong>Title</strong></Form.Label>
                             <Form.Control className="mb-3"
                                 type="title"
                                 value={bookRequest.title}
@@ -20,7 +20,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                     </Col>
                     <Col>
                         <Form.Group controlId="author">
-                            <Form.Label className="d-flex justify-content-center">Author</Form.Label>
+                            <Form.Label className="d-flex justify-content-center"><strong>Author</strong></Form.Label>
                             <Form.Control
                                 type="author"
                                 value={bookRequest.author}
@@ -30,7 +30,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                     </Col>
                     <Col>
                         <Form.Group controlId="category">
-                            <Form.Label className="d-flex justify-content-center">Category</Form.Label>
+                            <Form.Label className="d-flex justify-content-center"><strong>Category</strong></Form.Label>
                             <Form.Control
                                 type="category"
                                 value={bookRequest.category}
@@ -40,7 +40,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                     </Col>
                     <Col>
                         <Form.Group controlId="publisher">
-                            <Form.Label className="d-flex justify-content-center">Publisher</Form.Label>
+                            <Form.Label className="d-flex justify-content-center"><strong>Publisher</strong></Form.Label>
                             <Form.Control
                                 type="publisher"
                                 value={bookRequest.publisher}

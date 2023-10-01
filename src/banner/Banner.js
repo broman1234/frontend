@@ -8,8 +8,10 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
             {isShowErrorBanner && (
                 <Row>
                     <Col>
-                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowErrorBanner}>
-                            {bannerMessage}
+                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowErrorBanner}
+                               style={{height: "40px", marginBottom: "0px", padding: "0px", color: "gray"}}
+                               className="d-flex align-items-center justify-content-center">
+                            <strong>{bannerMessage}</strong>
                         </Alert>
                     </Col>
                 </Row>
@@ -18,8 +20,10 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
             {isShowSuccessBanner && (
                 <Row>
                     <Col>
-                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}>
-                            {bannerMessage}
+                        <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}
+                               style={{height: "40px", marginBottom: "0px", padding: "0px", color: "gray"}}
+                               className="d-flex align-items-center justify-content-center">
+                            <strong>{bannerMessage}</strong>
                         </Alert>
                     </Col>
                 </Row>
