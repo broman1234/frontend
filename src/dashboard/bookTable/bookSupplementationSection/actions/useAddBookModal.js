@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import useValidateAndRefreshJwt from "../../../../authentication/useValidateAndRefreshJwt";
 import {BannerContext} from "../../../../banner/BannerProvider";
 
-const useAddBookModal = (hideAddBookModal, setBooks, books) => {
+const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
     const [bookInfo, setBookInfo] = useState({
         title: "",
@@ -39,8 +39,8 @@ const useAddBookModal = (hideAddBookModal, setBooks, books) => {
                 }
                 return response.json();
             })
-            .then(book => {
-                setBooks([...books, book]);
+            .then(() => {
+                fetchBooks();
                 setIsShowBookTableSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just added a book successfully!");

@@ -36,8 +36,8 @@ const BookTable = ({setBooks, books}) => {
                 <div className="banner-children">
                     <div className="d-flex align-items-center justify-content-between">
                         <SearchArea bookRequest={bookRequest} setBookRequest={setBookRequest} fetchBooks={fetchBooks} />
-                        <div className="ms-2"> {/* 在这里添加左边内边距 */}
-                            <BookSupplementation setBooks={setBooks} books={books}/>
+                        <div className="ms-2">
+                            <BookSupplementation setBooks={setBooks} books={books} fetchBooks={fetchBooks}/>
                         </div>
                     </div>
 

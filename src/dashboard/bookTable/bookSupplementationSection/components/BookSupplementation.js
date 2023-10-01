@@ -3,7 +3,7 @@ import {Button, Col, Row} from "react-bootstrap";
 import useBookSupplementation from "../actions/useBookSupplementation";
 import AddBookModal from "./AddBookModal";
 
-const BookSupplementation = ({setBooks, books}) => {
+const BookSupplementation = ({setBooks, books, fetchBooks}) => {
 
     const {
         showAddBookModal,
@@ -29,6 +29,7 @@ const BookSupplementation = ({setBooks, books}) => {
                 hideAddBookModal={hideAddBookModal}
                 setBooks={setBooks}
                 books={books}
+                fetchBooks={fetchBooks}
             />
         </div>
     );
