@@ -39,13 +39,13 @@
   color: white;
 }
 
-.custom-button {
-  background-color: #8458B3;
-}
-
 .search-area {
   background-color:  #8458B3;
   border-radius: 10px;
+}
+
+.search-area-label {
+  color: white;
 }
 
 .overflow {
