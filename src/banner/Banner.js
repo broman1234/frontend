@@ -9,7 +9,7 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
                 <Row>
                     <Col>
                         <Alert key={bannerStyle} variant={bannerStyle} show={isShowErrorBanner}
-                               style={{height: "40px", marginBottom: "0px", padding: "0px", color: "gray"}}
+                               style={{height: "40px", marginBottom: "0px", padding: "0px"}}
                                className="d-flex align-items-center justify-content-center">
                             <strong>{bannerMessage}</strong>
                         </Alert>
@@ -21,7 +21,7 @@ const Banner = ({isShowErrorBanner, isShowSuccessBanner, bannerStyle, bannerMess
                 <Row>
                     <Col>
                         <Alert key={bannerStyle} variant={bannerStyle} show={isShowSuccessBanner}
-                               style={{height: "40px", marginBottom: "0px", padding: "0px", color: "gray"}}
+                               style={{height: "40px", marginBottom: "0px", padding: "0px"}}
                                className="d-flex align-items-center justify-content-center">
                             <strong>{bannerMessage}</strong>
                         </Alert>
