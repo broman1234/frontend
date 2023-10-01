@@ -33,13 +33,18 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white; /* 如果需要背景色 */
+  background-color: #494D5F; /* 如果需要背景色 */
   padding: 10px; /* 根据需要调整间距 */
   z-index: 999; /* 根据需要调整 z-index，以确保它位于页面上其他元素之上 */
+  color: white;
+}
+
+.custom-button {
+  background-color: #8458B3;
 }
 
 .search-area {
-  background-color: cadetblue;
+  background-color:  #8458B3;
   border-radius: 10px;
 }
 

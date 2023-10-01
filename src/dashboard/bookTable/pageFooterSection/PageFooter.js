@@ -6,7 +6,12 @@ const PageFooter = ({pageInfo, handlePageClick}) => {
         <Container className="fixed-footer">
             <Row>
                 <Col className="d-flex justify-content-center">
-                    {pageInfo.lastPage < 10 ? <Pagination>
+                    {pageInfo.lastPage < 10 ? <Pagination style={{
+                        "--bs-pagination-active-bg": "#d0bdf4",
+                        "--bs-pagination-active-border-color": "white",
+                        "--bs-pagination-color": "white",
+                        "--bs-pagination-bg": "transparent"
+                    }}>
                         {[...Array(pageInfo.lastPage).keys()].map(
                             pageNumber =>
                                 <Pagination.Item key={pageNumber}
@@ -14,7 +19,12 @@ const PageFooter = ({pageInfo, handlePageClick}) => {
                                                  active={pageNumber + 1 === pageInfo.currentPage}>{pageNumber + 1}
                                 </Pagination.Item>
                         )}
-                    </Pagination> : <Pagination>
+                    </Pagination> : <Pagination style={{
+                        "--bs-pagination-active-bg": "#d0bdf4",
+                        "--bs-pagination-active-border-color": "white",
+                        "--bs-pagination-color": "white",
+                        "--bs-pagination-bg": "transparent"
+                    }}>
                         <Pagination.First
                             onClick={() => handlePageClick(pageInfo.firstPage)}
                         />

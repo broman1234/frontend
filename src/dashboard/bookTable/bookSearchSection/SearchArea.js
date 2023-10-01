@@ -49,7 +49,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                         </Form.Group>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-center col-1">
-                        <Button onClick={fetchBooks}>Search</Button>
+                        <Button onClick={fetchBooks} style={{backgroundColor: "#d0bdf4", color: "black", borderColor: "white"}}>Search</Button>
                     </Col>
                 </Row>
             </Container>

@@ -34,9 +34,10 @@ const BookTable = ({setBooks, books}) => {
             <Banner isShowErrorBanner={isShowBookTableErrorBanner} isShowSuccessBanner={isShowBookTableSuccessBanner}
                     bannerStyle={bannerStyle} bannerMessage={bannerMessage}>
                 <div className="banner-children">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <SearchArea bookRequest={bookRequest} setBookRequest={setBookRequest} fetchBooks={fetchBooks} />
-                        <div className="ms-2">
+                    <div className="d-flex align-items-center justify-content-between"
+                         style={{backgroundColor: "#a28089", borderRadius: "10px"}}>
+                        <SearchArea bookRequest={bookRequest} setBookRequest={setBookRequest} fetchBooks={fetchBooks}/>
+                        <div className="mx-2">
                             <BookSupplementation setBooks={setBooks} books={books} fetchBooks={fetchBooks}/>
                         </div>
                     </div>
@@ -47,12 +48,14 @@ const BookTable = ({setBooks, books}) => {
                             <th>#</th>
                             <th onClick={() => handleSort('title')}>
                                 <div className="d-flex justify-content-between">
-                                    Title {sortField === 'title' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                                    Title {sortField === 'title' && (sortOrder === 'asc' ? <span>▲</span> :
+                                    <span>▼</span>)}
                                 </div>
                             </th>
                             <th onClick={() => handleSort('author')}>
                                 <div className="d-flex justify-content-between">
-                                    Author {sortField === 'author' && (sortOrder === 'asc' ? <span>▲</span> : <span>▼</span>)}
+                                    Author {sortField === 'author' && (sortOrder === 'asc' ? <span>▲</span> :
+                                    <span>▼</span>)}
                                 </div>
                             </th>
                             <th onClick={() => handleSort('category')}>
@@ -77,9 +80,9 @@ const BookTable = ({setBooks, books}) => {
                         <span className="d-flex align-items-center justify-content-between">
                             Operations
                             {deletedBookIds.length > 0 && <span className="d-flex justify-content-end">
-                                <Button className="mx-1" size="sm" variant="danger"
+                                <Button className="mx-1" size="sm" style={{backgroundColor: "#B22222", borderColor: "#B22222"}}
                                         onClick={() => submitDeleteBooks(deletedBookIds)}>Delete</Button>
-                                <Button size="sm" onClick={() => setDeletedBookIds([])}>Cancel</Button>
+                                <Button size="sm" onClick={() => setDeletedBookIds([])} variant="secondary">Cancel</Button>
                             </span>}
                         </span>
                             </th>

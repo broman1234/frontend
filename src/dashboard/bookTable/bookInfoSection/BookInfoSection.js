@@ -18,6 +18,7 @@ const BookInfoSection = ({book, books, setBooks}) => {
             <Button
                 className="mx-1"
                 onClick={() => openBookInfoModal(book)}
+                style={{backgroundColor: "#d0bdf4", color: "black", borderColor: "white"}}
             >
                 View
             </Button>

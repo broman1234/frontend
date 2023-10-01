@@ -16,11 +16,12 @@ const BookSupplementation = ({setBooks, books, fetchBooks}) => {
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Button
-                        className="btn btn-primary"
+                        className="btn btn-primary d-flex align-items-center"
                         onClick={showAddBookModal}
                         size="sm"
+                        style={{height: "40px", backgroundColor: "#d0bdf4", color: "black", borderColor: "white"}}
                     >
-                        Add Book
+                        <div>Add Book</div>
                     </Button>
                 </Col>
             </Row>
