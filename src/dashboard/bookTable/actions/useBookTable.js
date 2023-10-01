@@ -36,7 +36,7 @@ const useBookTable = (setBooks, books) => {
             method: "delete",
         }).then(response => {
             if (response.status === 200) {
-                setBooks(prevBooks => prevBooks.filter(book => !deletedBookIds.includes(book.id)));
+                fetchBooks();
                 setIsShowBookTableSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just deleted the books successfully!");

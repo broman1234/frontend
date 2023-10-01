@@ -76,6 +76,7 @@
 .banner-children {
   position: absolute;
   top: 45px; /* 控制内容与 banner 顶部的距离 */
+  width: 100%;
 }
 
 @keyframes App-logo-spin {
