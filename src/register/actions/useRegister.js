@@ -8,7 +8,7 @@ const useRegister = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [fetchedRoles, setFetchedRoles] = useState([]);
-    const [selectedRoles, setSelectedRoles] = useState([]);
+    const [selectedRole, setSelectedRole] = useState("");
     const [errorMessage, setErrorMessage] = useState("")
 
     useEffect(() => {
@@ -16,15 +16,11 @@ const useRegister = () => {
     }, [navigate, user]);
 
     const updateSelectedRole = (selectedRole) => {
-        const newSelectedRoles = ([...selectedRoles, selectedRole]);
-        setSelectedRoles(newSelectedRoles);
+        setSelectedRole(selectedRole);
     }
 
     const getButtonTitle = () => {
-        return fetchedRoles
-            .filter(fetchedRole => selectedRoles.includes(fetchedRole.id.toString()))
-            .map(role => role.roleName)
-            .join(', ');
+        return selectedRole;
     }
 
     const fetchRoles = () => {
@@ -53,7 +49,7 @@ const useRegister = () => {
         const reqBody = {
             username: username,
             password: password,
-            roles: fetchedRoles.filter(role => selectedRoles.includes(role.id.toString()))
+            role: selectedRole
         };
         fetch("api/auth/register", {
             headers: {
@@ -86,8 +82,8 @@ const useRegister = () => {
         fetchedRoles,
         setUsername,
         setPassword,
-        selectedRoles,
-        setSelectedRoles,
+        selectedRole,
+        setSelectedRole,
         sendRegisterRequest,
         updateSelectedRole,
         getButtonTitle,

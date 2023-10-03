@@ -54,8 +54,8 @@ const Register = () => {
                             onSelect={selectedRole => updateSelectedRole(selectedRole)}
                         >
                             {fetchedRoles.map(role => (
-                                <Dropdown.Item key={role.id} eventKey={role.id}>
-                                    {role.roleName}
+                                <Dropdown.Item key={role} eventKey={role}>
+                                    {role}
                                 </Dropdown.Item>
                             ))}
                         </DropdownButton>
