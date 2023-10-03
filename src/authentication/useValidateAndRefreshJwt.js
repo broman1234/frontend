@@ -1,11 +1,12 @@
 import useRoles from "./useRoles";
 import {useNavigate} from "react-router-dom";
+import {useCallback} from "react";
 
 const useValidateAndRefreshJwt = () => {
     const {user, decodedJwt} = useRoles();
     const navigate = useNavigate();
 
-    const validateAndRefreshJwt = () => {
+    const validateAndRefreshJwt = useCallback(() => {
         if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
             navigate("/login");
         } else if (decodedJwt.exp < Date.now() / 1000) {
@@ -31,7 +32,7 @@ const useValidateAndRefreshJwt = () => {
                     })
                 });
         }
-    }
+    }, [decodedJwt.exp, decodedJwt.roles.length, decodedJwt.sub, navigate, user]);
 
 
     return {validateAndRefreshJwt, user}

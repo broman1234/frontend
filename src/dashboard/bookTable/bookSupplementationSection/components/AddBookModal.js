@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import {Col, Row} from "react-bootstrap";
+import {Col, Dropdown, DropdownButton, Row} from "react-bootstrap";
 import useAddBookModal from "../actions/useAddBookModal";
 
 const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books, fetchBooks}) => {
@@ -10,7 +10,10 @@ const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books, fetchBooks}) =
         submitNewBook,
         bookInfo,
         setBookInfo,
-        addBookErrorMessage
+        addBookErrorMessage,
+        fetchedCategories,
+        updateSelectedCategory,
+        getButtonTitle
     } = useAddBookModal(hideAddBookModal, setBooks, books, fetchBooks);
 
     return (
@@ -56,11 +59,17 @@ const AddBookModal = ({isOpen, hideAddBookModal, setBooks, books, fetchBooks}) =
                                 Category
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Control type="category" placeholder="Category" value={bookInfo.category}
-                                              onChange={event => setBookInfo({
-                                                  ...bookInfo,
-                                                  category: event.target.value
-                                              })}/>
+                                <DropdownButton
+                                    id="categories"
+                                    title={getButtonTitle()}
+                                    onSelect={selectedCategory => updateSelectedCategory(selectedCategory)}
+                                >
+                                    {fetchedCategories.map(category => (
+                                        <Dropdown.Item key={category} eventKey={category}>
+                                            {category}
+                                        </Dropdown.Item>
+                                    ))}
+                                </DropdownButton>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPublisher">

@@ -4,11 +4,13 @@ import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefr
 
 const useBookTable = (setBooks, books) => {
     const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
-    const {setBannerStyle, setBannerMessage, bannerMessage, bannerStyle,
+    const {
+        setBannerStyle, setBannerMessage, bannerMessage, bannerStyle,
         isShowBookTableErrorBanner,
         setIsShowBookTableErrorBanner,
         isShowBookTableSuccessBanner,
-        setIsShowBookTableSuccessBanner} = useContext(BannerContext);
+        setIsShowBookTableSuccessBanner
+    } = useContext(BannerContext);
     const [bookRequest, setBookRequest] = useState({
         title: "",
         author: "",
@@ -94,7 +96,11 @@ const useBookTable = (setBooks, books) => {
             method: "get"
         })
             .then((response) => {
-                    return response.json()
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        return Promise.reject(response);
+                    }
                 }
             )
             .then(data => {

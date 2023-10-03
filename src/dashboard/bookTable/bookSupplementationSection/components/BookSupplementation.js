@@ -25,13 +25,13 @@ const BookSupplementation = ({setBooks, books, fetchBooks}) => {
                     </Button>
                 </Col>
             </Row>
-            <AddBookModal
+            {isAddBookModalOpen && <AddBookModal
                 isOpen={isAddBookModalOpen}
                 hideAddBookModal={hideAddBookModal}
                 setBooks={setBooks}
                 books={books}
                 fetchBooks={fetchBooks}
-            />
+            />}
         </div>
     );
 };
