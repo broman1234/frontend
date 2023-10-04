@@ -29,16 +29,16 @@ const useBookTable = (setBooks, books) => {
     const [sortOrder, setSortOrder] = useState(null);
     const [deletedBookIds, setDeletedBookIds] = useState([]);
 
-    const submitDeleteBooks = (deletedBookIds) => {
-        validateAndRefreshJwt();
+    const submitDeleteBooks = async (deletedBookIds) => {
+        const validJwt = await validateAndRefreshJwt();
         fetch(`api/admin/books/${deletedBookIds.join(',')}`, {
             headers: {
-                "Authorization": "Bearer " + jwt
+                "Authorization": "Bearer " + validJwt
             },
             method: "delete",
         }).then(response => {
             if (response.status === 200) {
-                fetchBooks();
+                fetchBooks(validJwt);
                 setIsShowBookTableSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just deleted the books successfully!");

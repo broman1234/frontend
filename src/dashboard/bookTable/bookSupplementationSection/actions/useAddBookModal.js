@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {UserContext} from "../../../../authentication/userProvider";
 
 const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
-    const {validateAndRefreshJwt, jwt} = useContext(UserContext);
+    const {validateAndRefreshJwt} = useContext(UserContext);
     const [bookInfo, setBookInfo] = useState({
         title: "",
         author: "",
@@ -18,11 +18,11 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const navigate = useNavigate();
 
-    const fetchCategories = useCallback(() => {
+    const fetchCategories = useCallback((validJwt) => {
         fetch("api/admin/books/categories", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + jwt
+                "Authorization": "Bearer " + validJwt
             },
             method: "get"
         }).then(response => {
@@ -38,16 +38,15 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
                 alert("Cannot fetch categories");
             }
         });
-    }, [jwt])
+    }, [])
 
     useEffect(() => {
             async function fetchData() {
-                await validateAndRefreshJwt();
-                fetchCategories();
+                const validJwt = await validateAndRefreshJwt();
+                fetchCategories(validJwt);
             }
 
-            fetchData().then(() => {
-            });
+            fetchData().then(() => {});
         }
         , [fetchCategories, navigate, validateAndRefreshJwt])
 
@@ -100,7 +99,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
                     });
                 }
             })
-    }, [bookInfo.author, bookInfo.description, bookInfo.publisher, bookInfo.title, fetchBooks, hideAddBookModal, selectedCategory, setBannerMessage, setBannerStyle, setIsShowBookTableSuccessBanner, jwt]);
+    }, [bookInfo.author, bookInfo.description, bookInfo.publisher, bookInfo.title, fetchBooks, hideAddBookModal, selectedCategory, setBannerMessage, setBannerStyle, setIsShowBookTableSuccessBanner]);
 
     const submitNewBook = useCallback(async () => {
         const validJwt = await validateAndRefreshJwt();
