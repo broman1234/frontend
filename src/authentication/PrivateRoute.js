@@ -1,15 +1,18 @@
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
-import useRoles from "./useRoles";
-import useValidateAndRefreshJwt from "./useValidateAndRefreshJwt";
+import {useContext, useEffect} from "react";
+import {UserContext} from "./userProvider";
 
 
-const PrivateRoute = ({ children }) => {
-    const {decodedJwt, user} = useRoles();
-    const navigate = useNavigate();
-    const {validateAndRefreshJwt} = useValidateAndRefreshJwt()
+const PrivateRoute = ({children}) => {
+    const {validateAndRefreshJwt} = useContext(UserContext);
 
-    useEffect(validateAndRefreshJwt, [decodedJwt, navigate, user, validateAndRefreshJwt]);
+    useEffect(() => {
+        async function fetchData() {
+            validateAndRefreshJwt();
+        }
+
+        fetchData().then(() => {
+        });
+    }, [validateAndRefreshJwt]);
 
     return children;
 };

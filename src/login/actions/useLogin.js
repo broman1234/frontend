@@ -1,17 +1,19 @@
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../../authentication/userProvider";
 
-const useLogin = (decodedJwt, user) => {
+const useLogin = () => {
+    const {decodedJwt, jwt, setJwt, setRefreshJwt} = useContext(UserContext);
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState()
 
     useEffect(() => {
-        if (user.jwt && decodedJwt.exp >= Date.now() / 1000) {
+        if (jwt && decodedJwt.exp >= Date.now() / 1000) {
             navigate("/dashboard");
         }
-    }, [navigate, user.jwt, decodedJwt.exp]);
+    }, [navigate, jwt, decodedJwt.exp]);
 
     const sendLoginRequest = () => {
         const reqBody = {
@@ -33,8 +35,8 @@ const useLogin = (decodedJwt, user) => {
                 }
             })
             .then(([body]) => {
-                user.setJwt(body.access_token);
-                user.setRefreshJwt(body.refresh_token);
+                setJwt(body.access_token);
+                setRefreshJwt(body.refresh_token);
             }).catch((message) => {
             setErrorMessage(message);
         });

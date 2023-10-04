@@ -1,9 +1,10 @@
 import {useCallback, useContext, useEffect, useState} from "react";
-import useValidateAndRefreshJwt from "../../../../authentication/useValidateAndRefreshJwt";
 import {BannerContext} from "../../../../banner/BannerProvider";
+import {useNavigate} from "react-router-dom";
+import {UserContext} from "../../../../authentication/userProvider";
 
 const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
-    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt()
+    const {validateAndRefreshJwt, jwt} = useContext(UserContext);
     const [bookInfo, setBookInfo] = useState({
         title: "",
         author: "",
@@ -15,31 +16,40 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
     const {setBannerStyle, setBannerMessage, setIsShowBookTableSuccessBanner} = useContext(BannerContext);
     const [fetchedCategories, setFetchedCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const navigate = useNavigate();
 
     const fetchCategories = useCallback(() => {
         fetch("api/admin/books/categories", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + user.jwt
+                "Authorization": "Bearer " + jwt
             },
             method: "get"
         }).then(response => {
             if (response.status === 200) {
-                return Promise.all([response.json()]);
+                return response.json();
             } else {
-                return Promise.reject("Cannot fetch categories");
+                return Promise.reject(response);
             }
-        }).then(([body]) => {
-            setFetchedCategories(body);
-        }).catch((message) => {
-            alert(message);})
-    }, [user.jwt])
+        }).then((body) => {
+            setFetchedCategories([...body]);
+        }).catch((error) => {
+            if (error.status !== 403) {
+                alert("Cannot fetch categories");
+            }
+        });
+    }, [jwt])
 
     useEffect(() => {
-            validateAndRefreshJwt();
-            fetchCategories();
-    }
-        , [fetchCategories, validateAndRefreshJwt])
+            async function fetchData() {
+                await validateAndRefreshJwt();
+                fetchCategories();
+            }
+
+            fetchData().then(() => {
+            });
+        }
+        , [fetchCategories, navigate, validateAndRefreshJwt])
 
     const updateSelectedCategory = (selectedCategory) => {
         setSelectedCategory(selectedCategory);
@@ -49,7 +59,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
         return selectedCategory;
     }
 
-    const submitNewBook = () => {
+    const submitNewBookApi = useCallback((validJwt) => {
         const reqBody = {
             "title": bookInfo.title,
             "author": bookInfo.author,
@@ -61,7 +71,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
         fetch("api/admin/books", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + user.jwt
+                "Authorization": "Bearer " + validJwt
             },
             method: "post",
             body: JSON.stringify(reqBody)
@@ -73,7 +83,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
                 return response.json();
             })
             .then(() => {
-                fetchBooks();
+                fetchBooks(validJwt);
                 setIsShowBookTableSuccessBanner(true);
                 setBannerStyle("success");
                 setBannerMessage("You've just added a book successfully!");
@@ -84,11 +94,19 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
                 hideAddBookModal()
             })
             .catch((error) => {
-                error.text().then(errorMessage => {
-                    setAddBookErrorMessage(errorMessage);
-                })
+                if (error.status !== 403) {
+                    error.text().then(errorMessage => {
+                        setAddBookErrorMessage(errorMessage);
+                    });
+                }
             })
-    }
+    }, [bookInfo.author, bookInfo.description, bookInfo.publisher, bookInfo.title, fetchBooks, hideAddBookModal, selectedCategory, setBannerMessage, setBannerStyle, setIsShowBookTableSuccessBanner, jwt]);
+
+    const submitNewBook = useCallback(async () => {
+        const validJwt = await validateAndRefreshJwt();
+        submitNewBookApi(validJwt);
+    }, [submitNewBookApi, validateAndRefreshJwt]);
+
     return {
         submitNewBook,
         bookInfo,

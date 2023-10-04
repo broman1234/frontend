@@ -1,9 +1,9 @@
 import {useCallback, useContext, useEffect, useState} from "react";
-import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
 import {BannerContext} from "../../../banner/BannerProvider";
+import {UserContext} from "../../../authentication/userProvider";
 
 const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBooks) => {
-    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
+    const {validateAndRefreshJwt, jwt} = useContext(UserContext);
     const [isShowSubmitConfirmationPopup, setIsShowSubmitConfirmationPopup] = useState(false);
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [editedBook, setEditedBook] = useState({
@@ -37,7 +37,7 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         fetch(`api/admin/books/${currentBook.id}`, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + user.jwt
+                "Authorization": "Bearer " + jwt
             },
             method: "put",
             body: JSON.stringify({...editedBook, id: currentBook.id})
@@ -67,7 +67,7 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
                 closeBookInfoModal();
             }
         )
-    }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks, user.jwt])
+    }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks, jwt])
 
     const handleEdit = () => {
         setIsEditEnabled(true);
@@ -92,7 +92,7 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
             fetch(`api/admin/books/${currentBook.id}`, {
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + user.jwt
+                    "Authorization": "Bearer " + jwt
                 },
                 method: "get",
             }).then(response => {
@@ -116,7 +116,7 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
                         setFetchBookInfoErrorMessage("Unable to fetch book information, please try again later");
                     }
                 )
-        }, [currentBook.id, setCurrentBook, user.jwt]
+        }, [currentBook.id, setCurrentBook, jwt]
     )
 
     return {

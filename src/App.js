@@ -4,21 +4,20 @@ import Login from "./login/components/Login";
 import AdminDashboard from "./dashboard/components/AdminDashboard";
 import Dashboard from "./dashboard/components/Dashboard";
 import Register from "./register/components/Register";
-import useRoles from "./authentication/useRoles";
 import PrivateRoute from "./authentication/PrivateRoute";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {UserContext} from "./authentication/userProvider";
 
 function App() {
-
-    const {decodedJwt, user} = useRoles();
-    console.log("jwt has been updated in App==========", user.jwt)
+    const {decodedJwt, jwt} = useContext(UserContext);
+    console.log("jwt has been updated in App==========", jwt)
     useEffect(() => {
         document.body.style.backgroundColor = '#494D5F'; // 你想要的背景颜色
     }, []);
 
     return (
         <Routes>
-            <Route path="/login" element={<Login decodedJwt={decodedJwt} user={user}/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
 
             <Route path="/dashboard" element={

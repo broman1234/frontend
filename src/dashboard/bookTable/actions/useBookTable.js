@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {BannerContext} from "../../../banner/BannerProvider";
-import useValidateAndRefreshJwt from "../../../authentication/useValidateAndRefreshJwt";
+import {UserContext} from "../../../authentication/userProvider";
 
 const useBookTable = (setBooks, books) => {
-    const {validateAndRefreshJwt, user} = useValidateAndRefreshJwt();
+    const {validateAndRefreshJwt, jwt} = useContext(UserContext);
     const {
         setBannerStyle, setBannerMessage, bannerMessage, bannerStyle,
         isShowBookTableErrorBanner,
@@ -33,7 +33,7 @@ const useBookTable = (setBooks, books) => {
         validateAndRefreshJwt();
         fetch(`api/admin/books/${deletedBookIds.join(',')}`, {
             headers: {
-                "Authorization": "Bearer " + user.jwt
+                "Authorization": "Bearer " + jwt
             },
             method: "delete",
         }).then(response => {
@@ -80,7 +80,7 @@ const useBookTable = (setBooks, books) => {
         });
     };
 
-    const fetchBooks = () => {
+    const fetchBooks = (validJwt) => {
         setSortField(null);
         setSortOrder(null);
         const queryParams = new URLSearchParams();
@@ -91,7 +91,7 @@ const useBookTable = (setBooks, books) => {
         queryParams.append("publisher", bookRequest.publisher);
         fetch(`api/admin/books?${queryParams.toString()}`, {
             headers: {
-                "Authorization": "Bearer " + user.jwt
+                "Authorization": "Bearer " + validJwt
             },
             method: "get"
         })
@@ -113,17 +113,21 @@ const useBookTable = (setBooks, books) => {
                     "pageSize": data.size
                 })
             })
-            .catch(() => {
-                setIsShowBookTableErrorBanner(true);
-                setBannerStyle('danger');
-                setBannerMessage("The server has some error. Please try again");
+            .catch((response) => {
+                if (response.status !== 403) {
+                    setIsShowBookTableErrorBanner(true);
+                    setBannerStyle('danger');
+                    setBannerMessage("The server has some error. Please try again");
+                    setTimeout(() => {
+                        setIsShowBookTableErrorBanner(false);
+                    }, 5000);
+                }
             })
     }
 
-    useEffect(fetchBooks, [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, user.jwt]);
+    useEffect(() => fetchBooks(jwt), [pageInfo.currentPage, setBannerMessage, setBannerStyle, setBooks, jwt]);
 
     return {
-        user,
         setBannerStyle,
         setBannerMessage,
         bannerMessage,

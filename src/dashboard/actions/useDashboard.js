@@ -1,14 +1,13 @@
-import useUser from "../../authentication/useUser";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {UserContext} from "../../authentication/userProvider";
 
 const useDashboard = () => {
-
-    const user = useUser();
+    const {setJwt, setRefreshJwt} = useContext(UserContext);
     const [books, setBooks] = useState([]);
 
     const logOut = () => {
-        user.setJwt("");
-        user.setRefreshJwt("");
+        setJwt("");
+        setRefreshJwt("");
     }
 
     return {logOut, books, setBooks};

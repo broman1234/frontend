@@ -1,9 +1,7 @@
-import useUser from "../../authentication/useUser";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 const useRegister = () => {
-    const user = useUser();
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -13,7 +11,7 @@ const useRegister = () => {
 
     useEffect(() => {
         fetchRoles();
-    }, [navigate, user]);
+    }, [navigate]);
 
     const updateSelectedRole = (selectedRole) => {
         setSelectedRole(selectedRole);
