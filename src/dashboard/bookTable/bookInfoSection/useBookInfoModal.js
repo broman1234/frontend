@@ -3,7 +3,7 @@ import {BannerContext} from "../../../banner/BannerProvider";
 import {UserContext} from "../../../authentication/userProvider";
 
 const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBooks) => {
-    const {validateAndRefreshJwt, jwt} = useContext(UserContext);
+    const {validateAndRefreshJwt} = useContext(UserContext);
     const [isShowSubmitConfirmationPopup, setIsShowSubmitConfirmationPopup] = useState(false);
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [editedBook, setEditedBook] = useState({
@@ -33,11 +33,12 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         setIsShowSubmitConfirmationPopup(false);
     }, [setIsShowSubmitConfirmationPopup])
 
-    const handleSubmit = useCallback(() => {
+    const handleSubmit = useCallback(async () => {
+        const validJwt = await validateAndRefreshJwt();
         fetch(`api/admin/books/${currentBook.id}`, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + jwt
+                "Authorization": "Bearer " + validJwt
             },
             method: "put",
             body: JSON.stringify({...editedBook, id: currentBook.id})
@@ -67,7 +68,7 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
                 closeBookInfoModal();
             }
         )
-    }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks, jwt])
+    }, [books, closeBookInfoModal, currentBook.id, editedBook, setBooks])
 
     const handleEdit = () => {
         setIsEditEnabled(true);
@@ -85,38 +86,46 @@ const useBookInfoModal = (setIsOpen, currentBook, setCurrentBook, books, setBook
         })
     }
 
-
-    useEffect(
-        () => {
-            validateAndRefreshJwt();
-            fetch(`api/admin/books/${currentBook.id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + jwt
-                },
-                method: "get",
-            }).then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response)
+    const getBookInfoApi = useCallback((validJwt) => {
+        fetch(`api/admin/books/${currentBook.id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + validJwt
+            },
+            method: "get",
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                return Promise.reject(response)
+            }
+        }).then(book => {
+            setCurrentBook({...book});
+        })
+            .catch(() => {
+                    setCurrentBook({
+                        ...currentBook,
+                        title: "",
+                        author: "",
+                        category: "",
+                        publisher: "",
+                        description: ""
+                    });
+                    setFetchBookInfoErrorMessage("Unable to fetch book information, please try again later");
                 }
-            }).then(book => {
-                setCurrentBook({...book});
-            })
-                .catch(() => {
-                        setCurrentBook({
-                            ...currentBook,
-                            title: "",
-                            author: "",
-                            category: "",
-                            publisher: "",
-                            description: ""
-                        });
-                        setFetchBookInfoErrorMessage("Unable to fetch book information, please try again later");
-                    }
-                )
-        }, [currentBook.id, setCurrentBook, jwt]
+            )
+    }, [setCurrentBook])
+
+
+    useEffect(() => {
+            async function fetchData() {
+                const validJwt = await validateAndRefreshJwt();
+                getBookInfoApi(validJwt);
+            }
+
+            fetchData().then(() => {
+            });
+        }, [currentBook.id, getBookInfoApi, setCurrentBook, validateAndRefreshJwt]
     )
 
     return {
