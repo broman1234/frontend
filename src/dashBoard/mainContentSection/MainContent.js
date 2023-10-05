@@ -4,7 +4,9 @@ import CategorySection from "./bookCategorySection/CategorySection";
 const MainContent = () => {
     return (
         <div className="main-content-container">
-          <CategorySection />
+            <div className="main-content">
+                <CategorySection />
+            </div>
         </div>
     );
 };
