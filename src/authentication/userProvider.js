@@ -38,7 +38,7 @@ const UserProvider = ({children}) => {
                     if (res.status === 200) {
                         return res.json();
                     } else {
-                        return Promise.reject(res);
+                        return reject(res);
                     }
                 })
                     .then(data => {

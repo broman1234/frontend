@@ -1,8 +1,10 @@
 import React from 'react';
 import {Col, Container, Row, Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import useSearchArea from "./useSearchArea";
 
 const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
+    const {submitSearchBooks} = useSearchArea(fetchBooks);
 
     return (
         <>
@@ -49,7 +51,7 @@ const SearchArea = ({bookRequest, setBookRequest, fetchBooks}) => {
                         </Form.Group>
                     </Col>
                     <Col className="d-flex align-items-center justify-content-center col-1">
-                        <Button onClick={fetchBooks} style={{backgroundColor: "#d0bdf4", color: "black", borderColor: "white"}}>Search</Button>
+                        <Button onClick={submitSearchBooks} style={{backgroundColor: "#d0bdf4", color: "black", borderColor: "white"}}>Search</Button>
                     </Col>
                 </Row>
             </Container>
