@@ -1,10 +1,10 @@
 import React from 'react';
-import useDashboard from "../actions/useDashboard";
+import useAdminDashboard from "../actions/useAdminDashboard";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import BookTable from "../bookTable";
 
 const AdminDashboard = () => {
-    const {logOut, books, setBooks} = useDashboard();
+    const {logOut, books, setBooks} = useAdminDashboard();
     console.log("books from admin dashboard=======", books)
 
     return (

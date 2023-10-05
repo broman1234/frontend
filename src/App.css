@@ -79,6 +79,41 @@
   width: 100%;
 }
 
+.topNavbarBrandImg {
+  height: 100px;
+}
+
+.navbar-transparent {
+  background-color: rgba(255, 255, 255, 0.2);; /* 设置背景透明 */
+  backdrop-filter: blur(10px); /* 可选：添加模糊效果 */
+  /* 其他样式，例如 padding、颜色等，根据需要自行调整 */
+}
+
+body .navbar {
+  padding: 0px;
+}
+
+body .custom-container {
+  margin: 0px;
+  max-width: 100%;
+}
+
+.custom-logout-button-container {
+  height: 100px;
+}
+
+body .custom-navbar-brand {
+  width: 150px;
+  display: flex;
+  white-space: normal;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

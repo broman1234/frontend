@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {UserContext} from "../../authentication/userProvider";
 
-const useDashboard = () => {
+const useAdminDashboard = () => {
     const {setJwt, setRefreshJwt} = useContext(UserContext);
     const [books, setBooks] = useState([]);
 
@@ -13,4 +13,4 @@ const useDashboard = () => {
     return {logOut, books, setBooks};
 }
 
-export default useDashboard;
+export default useAdminDashboard;

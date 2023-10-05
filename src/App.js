@@ -1,8 +1,8 @@
 import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Login from "./login/components/Login";
-import AdminDashboard from "./dashboard/components/AdminDashboard";
-import Dashboard from "./dashboard/components/Dashboard";
+import AdminDashboard from "./adminDashboard/components/AdminDashboard";
+import Dashboard from "./dashBoard/Dashboard";
 import Register from "./register/components/Register";
 import PrivateRoute from "./authentication/PrivateRoute";
 import {useContext, useEffect} from "react";
