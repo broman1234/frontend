@@ -3,7 +3,8 @@ import {Nav} from "react-bootstrap";
 
 const CategorySection = () => {
     return (
-        <>
+        <div className="d-flex gap-2">
+            <span>hello</span>
             <Nav variant="underline" defaultActiveKey="/home">
                 <Nav.Item>
                     <Nav.Link href="/home">Active</Nav.Link>
@@ -17,7 +18,7 @@ const CategorySection = () => {
                     </Nav.Link>
                 </Nav.Item>
             </Nav>
-        </>
+        </div>
     );
 };
 
