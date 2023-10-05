@@ -1,24 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TopNavBar from "./navBarSection/TopNavBar";
+import MainContent from "./mainContentSection/MainContent";
 
 const Dashboard = () => {
 
     return (
-        <>
+        <div className="dashboard">
             <TopNavBar />
-            {/*<div className="float-right">*/}
-            {/*    <button*/}
-            {/*        className="btn btn-danger"*/}
-            {/*        onClick={logOut}*/}
-            {/*    >*/}
-            {/*        Log Out*/}
-            {/*    </button>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    Dashboard*/}
-            {/*</div>*/}
-        </>
+            <MainContent />
+        </div>
 );
 };
 
