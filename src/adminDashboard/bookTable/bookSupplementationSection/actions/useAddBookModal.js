@@ -48,7 +48,7 @@ const useAddBookModal = (hideAddBookModal, setBooks, books, fetchBooks) => {
 
             fetchData().then(() => {});
         }
-        , [fetchCategories, navigate, validateAndRefreshJwt])
+        , [fetchCategories, validateAndRefreshJwt])
 
     const updateSelectedCategory = (selectedCategory) => {
         setSelectedCategory(selectedCategory);

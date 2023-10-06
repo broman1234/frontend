@@ -133,6 +133,36 @@ body .custom-navbar-brand {
   justify-content: center;
 }
 
+.custom-nav-item {
+  --bs-nav-link-color: #D8BFD8;
+  --bs-nav-link-hover-color: #E6E6FA;
+}
+
+body .custom-nav {
+  --bs-nav-underline-link-active-color: beige;
+  font-size: 12px;
+  --bs-nav-link-padding-x: none;
+}
+
+body .custom-nav-underline {
+  --bs-nav-underline-gap: 0.5rem;
+}
+
+.category-title-section {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.horizontal-line {
+  width: 100%; /* 分割线的宽度 */
+  background-color: #000; /* 分割线的颜色 */
+  height: 1px; /* 分割线的高度，这里设置为页面的高度，以确保竖直分割 */
+  position: absolute; /* 将分割线的位置设为绝对定位 */
+   /* 将分割线水平居中 */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

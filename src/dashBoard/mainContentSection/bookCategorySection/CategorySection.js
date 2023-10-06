@@ -1,24 +1,24 @@
 import React from 'react';
 import {Nav} from "react-bootstrap";
+import useCategorySection from "./useCategorySection";
 
 const CategorySection = () => {
+    const {fetchedCategories} = useCategorySection();
+
     return (
-        <div className="d-flex gap-2">
-            <span>hello</span>
-            <Nav variant="underline" defaultActiveKey="/home">
-                <Nav.Item>
-                    <Nav.Link href="/home">Active</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-1">Option 2</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="disabled" disabled>
-                        Disabled
-                    </Nav.Link>
-                </Nav.Item>
-            </Nav>
-        </div>
+        <>
+            <div className="d-flex gap-3 mt-1">
+                <span className="category-title-section">Categories</span>
+                <Nav variant="underline" className="custom-nav custom-nav-underline">
+                    {
+                        fetchedCategories.map(category => <Nav.Item className="custom-nav-item">
+                            <Nav.Link >{category}</Nav.Link>
+                        </Nav.Item>)
+                    }
+                </Nav>
+            </div>
+            <div className="horizontal-line"></div>
+        </>
     );
 };
 
