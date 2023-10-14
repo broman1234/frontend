@@ -188,6 +188,19 @@ body .custom-card {
 
 body .custom-card-body {
     padding: 0.5em;
+  max-width: 100%;
+}
+
+body .custom-card-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 0;
+  max-width: 100%;
+  white-space: normal;
+}
+
+body .custom-col {
+  max-width: 33.3%;
 }
 
 @keyframes App-logo-spin {
