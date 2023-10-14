@@ -7,12 +7,11 @@ const PopularityRankSection = () => {
         <div>
             <SectionTitle title="Top Books by Popularity"/>
             <Container fluid={true} >
-
                 <Row>
-                    <Col>
+                    <Col className="mb-2" className="mb-2">
                         <Card className="custom-card" className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -25,10 +24,10 @@ const PopularityRankSection = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col>
+                    <Col className="mb-2">
                         <Card className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -41,10 +40,10 @@ const PopularityRankSection = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col>
+                    <Col className="mb-2">
                         <Card className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -59,10 +58,10 @@ const PopularityRankSection = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col className="mb-2">
                         <Card className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -75,10 +74,10 @@ const PopularityRankSection = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col>
+                    <Col className="mb-2">
                         <Card className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -91,10 +90,10 @@ const PopularityRankSection = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col>
+                    <Col className="mb-2">
                         <Card className="custom-card">
                             <Card.Img variant="top" src="/images/img.png" className="card-img"/>
-                            <Card.Body>
+                            <Card.Body className="custom-card-body">
                                 <Card.Title>Card Title</Card.Title>
                                 <span>&#9733;</span>
                                 <span>&#9733;</span>
@@ -109,6 +108,7 @@ const PopularityRankSection = () => {
                     </Col>
                 </Row>
             </Container>
+            <div className="horizontal-line"></div>
         </div>
     );
 };

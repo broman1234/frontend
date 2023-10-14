@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const SectionTitle = ({title}) => {
     return (
-        <div className="d-flex justify-content-between gap-3 mt-1">
+        <div className="d-flex justify-content-between gap-3 mt-1 section-title">
             <span>
                 {title}
             </span>
