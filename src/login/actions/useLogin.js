@@ -11,6 +11,7 @@ const useLogin = () => {
 
     useEffect(() => {
         if (jwt && decodedJwt.exp >= Date.now() / 1000) {
+            console.log("jwt is valid in useLogin", jwt, decodedJwt.exp)
             navigate("/dashboard");
         }
     }, [navigate, jwt, decodedJwt.exp]);

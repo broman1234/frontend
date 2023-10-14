@@ -7,10 +7,11 @@ import Register from "./register/components/Register";
 import PrivateRoute from "./authentication/PrivateRoute";
 import {useContext, useEffect} from "react";
 import {UserContext} from "./authentication/userProvider";
+import login from "./login/components/Login";
 
 function App() {
     const {decodedJwt, jwt} = useContext(UserContext);
-    console.log("jwt has been updated in App==========", jwt)
+    console.log("jwt has been updated in App==========", jwt, decodedJwt.roles)
     useEffect(() => {
         document.body.style.backgroundColor = '#494D5F'; // 你想要的背景颜色
     }, []);

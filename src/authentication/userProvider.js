@@ -1,7 +1,7 @@
 import {createContext, useCallback} from "react";
 import {useLocalState} from "./useLocalStorage";
 import jwt_decode from "jwt-decode";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
 const UserContext = createContext();
 
@@ -26,7 +26,8 @@ const UserProvider = ({children}) => {
     const validateAndRefreshJwt = useCallback(() => {
         return new Promise((resolve, reject) => {
             if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
-                navigate("/login");
+                console.log("jwt is invalid==============")
+                resolve("");
             } else if (decodedJwt.exp < Date.now() / 1000) {
                 fetch("api/auth/token/refresh", {
                     headers: {
@@ -46,8 +47,7 @@ const UserProvider = ({children}) => {
                         resolve(data.access_token);
                     })
                     .catch(() => {
-                        navigate("/login");
-                        resolve(); // 这里添加 resolve() 来表示异步操作已完成
+                        resolve(""); // 这里添加 resolve() 来表示异步操作已完成
                     });
             } else {
                 resolve(jwt);

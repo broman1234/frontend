@@ -1,213 +1,213 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .fixed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #494D5F; /* 如果需要背景色 */
-  padding: 10px; /* 根据需要调整间距 */
-  z-index: 999; /* 根据需要调整 z-index，以确保它位于页面上其他元素之上 */
-  color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #494D5F; /* 如果需要背景色 */
+    padding: 10px; /* 根据需要调整间距 */
+    z-index: 999; /* 根据需要调整 z-index，以确保它位于页面上其他元素之上 */
+    color: white;
 }
 
 .search-area {
-  background-color:  #8458B3;
-  border-radius: 10px;
+    background-color: #8458B3;
+    border-radius: 10px;
 }
 
 .search-area-label {
-  color: white;
+    color: white;
 }
 
 .overflow {
-  overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  float: left;
-  width: 200px
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    float: left;
+    width: 200px
 }
 
 .overflow:hover {
-  overflow: visible;
+    overflow: visible;
 }
 
-.overflow:hover span{
-  position: relative;
-  background-color: white;
+.overflow:hover span {
+    position: relative;
+    background-color: white;
 
-  box-shadow: 0 0 4px 0 black;
-  border-radius: 1px;
+    box-shadow: 0 0 4px 0 black;
+    border-radius: 1px;
 }
 
 .banner {
-  position: relative;
+    position: relative;
 }
 
 .banner-children {
-  position: absolute;
-  top: 45px; /* 控制内容与 banner 顶部的距离 */
-  width: 100%;
+    position: absolute;
+    top: 45px; /* 控制内容与 banner 顶部的距离 */
+    width: 100%;
 }
 
 .topNavbarBrandImg {
-  height: 100px;
+    height: 100px;
 }
 
 .navbar-transparent {
-  background-color: rgba(255, 255, 255, 0.2);; /* 设置背景透明 */
-  backdrop-filter: blur(10px); /* 可选：添加模糊效果 */
-  /* 其他样式，例如 padding、颜色等，根据需要自行调整 */
+    background-color: rgba(255, 255, 255, 0.2);; /* 设置背景透明 */
+    backdrop-filter: blur(10px); /* 可选：添加模糊效果 */
+    /* 其他样式，例如 padding、颜色等，根据需要自行调整 */
 }
 
 body .navbar {
-  padding: 0px;
+    padding: 0px;
 }
 
 body .custom-container {
-  margin: 0px;
-  max-width: 100%;
+    margin: 0px;
+    max-width: 100%;
 }
 
 .custom-logout-button-container {
-  height: 100px;
+    height: 100px;
 }
 
 body .custom-navbar-brand {
-  width: 150px;
-  display: flex;
-  white-space: normal;
+    width: 150px;
+    display: flex;
+    white-space: normal;
 }
 
 .brand-title {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 
 .dashboard {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .main-content {
-  background-color: rgba(255, 255, 255, 0.1);; /* 设置背景透明 */
-  backdrop-filter: blur(10px);
-  width: 60%;
-  height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);; /* 设置背景透明 */
+    backdrop-filter: blur(10px);
+    width: 60%;
+    height: 100%;
 }
 
 .main-content-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .custom-nav-item {
-  --bs-nav-link-color: #D8BFD8;
-  --bs-nav-link-hover-color: #E6E6FA;
+    --bs-nav-link-color: #D8BFD8;
+    --bs-nav-link-hover-color: #E6E6FA;
 }
 
 body .custom-nav {
-  --bs-nav-underline-link-active-color: beige;
-  font-size: 12px;
-  --bs-nav-link-padding-x: none;
+    --bs-nav-underline-link-active-color: beige;
+    font-size: 12px;
+    --bs-nav-link-padding-x: none;
 }
 
 body .custom-nav-underline {
-  --bs-nav-underline-gap: 0.5rem;
+    --bs-nav-underline-gap: 0.5rem;
 }
 
 .category-title-section {
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 
 .horizontal-line {
-  width: 100%; /* 分割线的宽度 */
-  background-color: #000; /* 分割线的颜色 */
-  height: 1px; /* 分割线的高度，这里设置为页面的高度，以确保竖直分割 */
-  position: absolute; /* 将分割线的位置设为绝对定位 */
-   /* 将分割线水平居中 */
+    width: 100%; /* 分割线的宽度 */
+    background-color: #000; /* 分割线的颜色 */
+    height: 1px; /* 分割线的高度，这里设置为页面的高度，以确保竖直分割 */
+    position: absolute; /* 将分割线的位置设为绝对定位 */
+    /* 将分割线水平居中 */
 }
 
 .section-title {
-  padding-left: 10px;
-  padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .view-more-link {
-  color: rgba(240, 248, 255, 0.5);
-  font-size: small;
+    color: rgba(240, 248, 255, 0.5);
+    font-size: small;
 }
 
 .card-img {
-  margin-top: 0.5em;
-  max-width: 80%;
-  height: auto;
+    margin-top: 0.5em;
+    max-width: 80%;
+    height: auto;
 }
 
 body .custom-card {
-  box-shadow: #d7bed7 0 0.5em 1em -0.125em;
-  background-color:#5b6f6052;
-  --bs-card-border-color: none;
-  align-items: center;
+    box-shadow: #d7bed7 0 0.5em 1em -0.125em;
+    background-color: #5b6f6052;
+    --bs-card-border-color: none;
+    align-items: center;
 }
 
 body .custom-card-body {
     padding: 0.5em;
-  max-width: 100%;
+    max-width: 100%;
 }
 
 body .custom-card-title {
     font-size: 1em;
     font-weight: bold;
     margin-bottom: 0;
-  max-width: 100%;
-  white-space: normal;
+    max-width: 100%;
+    white-space: normal;
 }
 
 body .custom-col {
-  max-width: 33.3%;
+    max-width: 33.3%;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
