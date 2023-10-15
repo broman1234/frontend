@@ -26,7 +26,6 @@ const UserProvider = ({children}) => {
     const validateAndRefreshJwt = useCallback(() => {
         return new Promise((resolve, reject) => {
             if (decodedJwt.sub === "" || decodedJwt.roles.length === 0) {
-                console.log("jwt is invalid==============")
                 resolve("");
             } else if (decodedJwt.exp < Date.now() / 1000) {
                 fetch("api/auth/token/refresh", {
