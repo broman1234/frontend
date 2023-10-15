@@ -4,7 +4,7 @@ import SectionTitle from "../../../common/SectionTitle";
 import usePopularityRankSection from "./usePopularityRankSection";
 
 const PopularityRankSection = () => {
-    const {booksByPopularityRank} = usePopularityRankSection();
+    const {booksByPopularityRank, getStarRating} = usePopularityRankSection();
 
     const bookComponents = booksByPopularityRank.slice(0, 6).map(book => (
         <Col className="mb-2" key={book.id}>
@@ -12,11 +12,9 @@ const PopularityRankSection = () => {
                 <Card.Img variant="top" src={book.coverImage} className="card-img"/>
                 <Card.Body className="custom-card-body">
                     <Card.Title className="custom-card-title">{book.title}</Card.Title>
-                    <div className="custom-star-rating">
-                        {book.rating !== null && Array.from({ length: book.rating }).map((_, index) => (
-                            <span key={index}>&#9733;</span>
-                        ))}
-                    </div>
+                    {getStarRating(book.rating).map((icon, index) => (
+                        <span key={index}>{icon}</span>
+                    ))}
                     <Card.Text>
                         {book.author}
                     </Card.Text>
