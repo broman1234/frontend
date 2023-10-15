@@ -17,7 +17,8 @@ const usePopularityRankSection = () => {
             } else {
                 return Promise.reject(response);
             }
-        }).then(books => setBooksByPopularityRank(books));
+        }).then(books => setBooksByPopularityRank(books))
+            .catch(() => {});
     }
 
     useEffect(() => {

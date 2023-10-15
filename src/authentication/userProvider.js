@@ -1,7 +1,7 @@
 import {createContext, useCallback} from "react";
 import {useLocalState} from "./useLocalStorage";
 import jwt_decode from "jwt-decode";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const UserContext = createContext();
 

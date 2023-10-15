@@ -5,7 +5,6 @@ import BookTable from "../bookTable";
 
 const AdminDashboard = () => {
     const {logOut, books, setBooks} = useAdminDashboard();
-    console.log("books from admin dashboard=======", books)
 
     return (
         <>

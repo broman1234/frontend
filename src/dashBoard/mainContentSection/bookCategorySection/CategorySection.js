@@ -11,7 +11,7 @@ const CategorySection = () => {
                 <span className="category-title-section">Categories</span>
                 <Nav variant="underline" className="custom-nav custom-nav-underline">
                     {
-                        fetchedCategories.map(category => <Nav.Item className="custom-nav-item">
+                        fetchedCategories.map(category => <Nav.Item key={category} className="custom-nav-item">
                             <Nav.Link >{category}</Nav.Link>
                         </Nav.Item>)
                     }
