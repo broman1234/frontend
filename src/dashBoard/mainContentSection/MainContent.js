@@ -1,6 +1,7 @@
 import React from 'react';
 import CategorySection from "./bookCategorySection/CategorySection";
 import PopularityRankSection from "./popularityRankSection/PopularityRankSection";
+import RatingRankSection from "./ratingRankSection/RatingRankSection";
 
 const MainContent = () => {
     return (
@@ -8,6 +9,7 @@ const MainContent = () => {
             <div className="main-content">
                 <CategorySection />
                 <PopularityRankSection />
+                <RatingRankSection />
             </div>
         </div>
     );

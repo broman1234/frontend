@@ -1,13 +1,13 @@
 import React from 'react';
-import {Card, Col, Container, Row} from "react-bootstrap";
 import SectionTitle from "../../../common/SectionTitle";
-import usePopularityRankSection from "./usePopularityRankSection";
+import {Card, Col, Container, Row} from "react-bootstrap";
+import useRatingRankSection from "./useRatingRankSection";
 import getStarRating from "../../../utils/getStarRating";
 
-const PopularityRankSection = () => {
-    const {booksByPopularityRank} = usePopularityRankSection();
+const RatingRankSection = () => {
+    const {booksByRatingRank} = useRatingRankSection();
 
-    const bookComponents = booksByPopularityRank.slice(0, 6).map(book => (
+    const bookComponents = booksByRatingRank.slice(0, 6).map(book => (
         <Col className="mb-2" key={book.id}>
             <Card className="custom-card">
                 <Card.Img variant="top" src={book.coverImage} className="card-img"/>
@@ -16,6 +16,7 @@ const PopularityRankSection = () => {
                     {getStarRating(book.rating).map((icon, index) => (
                         <span key={index}>{icon}</span>
                     ))}
+                    <span>(Rating count: {book.ratingCount})</span>
                     <Card.Text>
                         {book.author}
                     </Card.Text>
@@ -36,7 +37,7 @@ const PopularityRankSection = () => {
 
     return (
         <div>
-            <SectionTitle title="Top Books by Popularity"/>
+            <SectionTitle title="Top Books by Rating"/>
             <Container fluid={true} >
                 {rows}
             </Container>
@@ -45,4 +46,4 @@ const PopularityRankSection = () => {
     );
 };
 
-export default PopularityRankSection;
+export default RatingRankSection;

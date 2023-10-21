@@ -1,12 +1,12 @@
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../../../authentication/userProvider";
 
-const usePopularityRankSection = () => {
+const useRatingRankSection = () => {
     const {jwt} = useContext(UserContext);
-    console.log("jwt has been updated in usePopularityRankSection==========", jwt);
-    const [booksByPopularityRank, setBooksByPopularityRank] = useState([]);
-    const fetchBooksByPopularityRank = (validJwt) => {
-        fetch('/api/books/popularity_rank', {
+    const [booksByRatingRank, setBooksByRatingRank] = useState([]);
+
+    const fetchBooksByRatingRank = (validJwt) => {
+        fetch('/api/books/rating_rank', {
             headers: {
                 'Authorization': "Bearer " + validJwt
             },
@@ -17,15 +17,15 @@ const usePopularityRankSection = () => {
             } else {
                 return Promise.reject(response);
             }
-        }).then(books => setBooksByPopularityRank(books))
+        }).then(books => setBooksByRatingRank(books.content))
             .catch(() => {});
     }
 
     useEffect(() => {
-        fetchBooksByPopularityRank(jwt)
+        fetchBooksByRatingRank(jwt)
     }, [jwt])
 
-    return {booksByPopularityRank};
+    return {booksByRatingRank};
 }
 
-export default usePopularityRankSection;
+export default useRatingRankSection;
